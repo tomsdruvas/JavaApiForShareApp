@@ -1,5 +1,6 @@
 package com.example.demo.shareItem;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -7,8 +8,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-import java.time.LocalDateTime;
 
+import java.io.IOException;
+import java.io.InputStream;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verify;
 
 @ExtendWith(MockitoExtension.class)
@@ -32,8 +36,22 @@ class ShareItemServiceTest {
     }
 
     @Test
-    @Disabled
-    void createShareItemObject() {
+    void testShareItemObjectMapper() throws JsonProcessingException {
+        String mockData = getJson("mock-api-call-response.json");
+        ShareItem actual = underTest.shareItemObjectMapper(mockData);
+        assertEquals(actual.getPrice().toString(), "121.14");
+    }
+
+    private String getJson(String path) {
+        try {
+            InputStream jsonStream = this.getClass().getClassLoader().getResourceAsStream(path);
+            assert jsonStream != null;
+            return new String(jsonStream.readAllBytes());
+        } catch (IOException ex) {
+            throw new RuntimeException(ex);
+        }
+
+
     }
 
 

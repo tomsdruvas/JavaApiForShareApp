@@ -18,7 +18,7 @@ class ShareItemRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10, LocalDateTime.now());
+        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, LocalDateTime.now());
         underTest.save(shareItem);
     }
 

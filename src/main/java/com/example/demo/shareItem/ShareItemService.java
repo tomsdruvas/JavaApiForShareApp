@@ -28,13 +28,13 @@ public class ShareItemService {
 
 
 
-    public ShareItem createShareItemObject(String response) throws JsonProcessingException {
+    public ShareItem shareItemObjectMapper(String response) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode shareItemObject = mapper.readTree(response).get("Global Quote");
         ShareItem shareItem = new ShareItem();
         shareItem.setName(shareItemObject.get("01. symbol").asText());
         shareItem.setSymbol(shareItemObject.get("01. symbol").asText());
-        shareItem.setPrice(shareItemObject.get("05. price").asInt());
+        shareItem.setPrice(shareItemObject.get("05. price").asDouble());
         shareItem.setUpdatedAt(LocalDateTime.now());
 
         return shareItem;
@@ -54,7 +54,7 @@ public class ShareItemService {
 
         WebClientToGetShareItem webClientToGetShareItem = new WebClientToGetShareItem(WebClient.create(), properties);
 
-        ShareItem shareItem = createShareItemObject(webClientToGetShareItem.getShareItemFromApiBySymbol(symbol));
+        ShareItem shareItem = shareItemObjectMapper(webClientToGetShareItem.getShareItemFromApiBySymbol(symbol));
         return shareItemRepository.save(shareItem);
     }
 }

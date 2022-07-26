@@ -22,14 +22,14 @@ public class ShareItem {
     @Column(nullable = false, unique = true)
     private String symbol;
     @Column(nullable = false)
-    private Integer price;
+    private Double price;
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
     public ShareItem() {
     }
 
-    public ShareItem(Long id, String name, String symbol, Integer price, LocalDateTime updatedAt) {
+    public ShareItem(Long id, String name, String symbol, Double price, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
         this.symbol = symbol;
@@ -37,7 +37,7 @@ public class ShareItem {
         this.updatedAt = updatedAt;
     }
 
-    public ShareItem(String name, String symbol, Integer price, LocalDateTime updatedAt) {
+    public ShareItem(String name, String symbol, Double price, LocalDateTime updatedAt) {
         this.name = name;
         this.symbol = symbol;
         this.price = price;
@@ -68,11 +68,11 @@ public class ShareItem {
         this.symbol = symbol;
     }
 
-    public Integer getPrice() {
+    public Double getPrice() {
         return price;
     }
 
-    public void setPrice(Integer price) {
+    public void setPrice(Double price) {
         this.price = price;
     }
 
