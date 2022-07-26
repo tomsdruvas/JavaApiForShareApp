@@ -29,7 +29,7 @@ public class ShareItemController {
     @GetMapping(path = "/{symbol}")
     public ShareItem getShareItemBySymbolNew(@PathVariable("symbol") String symbol) throws IOException, InterruptedException {
 
-        return shareItemService.getShareItemNew(symbol);
+        return shareItemService.getShareItem(symbol);
     }
 
 }

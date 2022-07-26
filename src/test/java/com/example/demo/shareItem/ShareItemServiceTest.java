@@ -36,15 +36,5 @@ class ShareItemServiceTest {
     void createShareItemObject() {
     }
 
-    @Test
-    @Disabled
-    void httpClientToGetShareInfo() {
-    }
 
-    @Test
-    void canAddShareItem() {
-
-        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10, LocalDateTime.now());
-//        underTest.save(shareItem);
-    }
 }

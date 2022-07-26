@@ -43,7 +43,7 @@ public class ShareItemService {
 
 
 
-    public ShareItem getShareItemNew(String symbol) throws IOException, InterruptedException {
+    public ShareItem getShareItem(String symbol) throws IOException, InterruptedException {
         boolean doesSymbolExistInDb = shareItemRepository.existsBySymbol(symbol);
         if (doesSymbolExistInDb){
             return shareItemRepository.findShareItemBySymbol(symbol);
