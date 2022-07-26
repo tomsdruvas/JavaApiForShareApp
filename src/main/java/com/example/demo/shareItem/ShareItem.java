@@ -1,12 +1,29 @@
 package com.example.demo.shareItem;
 
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
+@Entity
+@Table
 public class ShareItem {
+    @Id
+    @SequenceGenerator(
+            name = "shareitem_sequence",
+            sequenceName = "shareitem_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = GenerationType.SEQUENCE,
+            generator = "shareitem_sequence"
+    )
     private Long id;
+    @Column(nullable = false, unique = true)
     private String name;
+    @Column(nullable = false, unique = true)
     private String symbol;
+    @Column(nullable = false)
     private Integer price;
+    @Column(nullable = false)
     private LocalDateTime updatedAt;
 
     public ShareItem() {

@@ -1,26 +1,35 @@
 package com.example.demo.shareItem;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.fasterxml.jackson.databind.JsonNode;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDateTime;
+
+import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
-@RequestMapping(path = "api/shareitem/")
+@RequestMapping(path = "api/shareitem")
+
 public class ShareItemController {
 
 
+    private final ShareItemService shareItemService;
+    @Autowired
+    public ShareItemController(ShareItemService shareItemService) {
+        this.shareItemService = shareItemService;
+    }
+
     @GetMapping
     public List<ShareItem> getShareItems(){
-        return List.of(
-                new ShareItem(
-                        1L,
-                        "Amazon",
-                        "AMZN",
-                        10,
-                        LocalDateTime.now()
-                ));
+        return shareItemService.getShareItems();
     }
+
+    @GetMapping(path = "/{symbol}")
+    public ShareItem getShareItemBySymbolNew(@PathVariable("symbol") String symbol) throws IOException, InterruptedException {
+
+        return shareItemService.getShareItemNew(symbol);
+    }
+
 }
