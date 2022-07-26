@@ -10,8 +10,6 @@ import org.springframework.web.reactive.function.client.WebClient;
 public class WebClientToGetShareItem {
 
     private final WebClient webClient;
-//    public static String PATH_PARAM_BY_SYMBOL = "https://www.alphavantage.co/query?function=GLOBAL_QUOTE&symbol={symbol}&apikey=undefined";
-
     private final WebClientToGetShareItemProperties properties;
 
 
