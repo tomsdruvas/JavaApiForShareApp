@@ -1,5 +1,8 @@
 package com.example.demo.shareItem;
 
+import com.example.demo.webClient.WebClientToGetShareItem;
+import com.example.demo.webClient.WebClientToGetShareItemProperties;
+import com.example.demo.webClient.WebClientUrlEnum;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -50,7 +53,8 @@ public class ShareItemService {
         }
 
         WebClientToGetShareItemProperties properties = new WebClientToGetShareItemProperties();
-        properties.setBaseUrl("https://www.alphavantage.co");
+        properties.setBaseUrl(WebClientUrlEnum.BASE_URL.getUrl());
+        properties.setEndPoint(WebClientUrlEnum.GLOBAL_QUOTE.getUrl());
 
         WebClientToGetShareItem webClientToGetShareItem = new WebClientToGetShareItem(WebClient.create(), properties);
 

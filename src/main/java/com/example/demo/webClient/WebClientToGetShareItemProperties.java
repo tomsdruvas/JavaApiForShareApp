@@ -1,4 +1,4 @@
-package com.example.demo.shareItem;
+package com.example.demo.webClient;
 
 import org.springframework.context.annotation.Configuration;
 
@@ -6,6 +6,15 @@ import org.springframework.context.annotation.Configuration;
 public class WebClientToGetShareItemProperties {
 
     private String baseUrl;
+    private String endPoint;
+
+    public String getEndPoint() {
+        return endPoint;
+    }
+
+    public void setEndPoint(String endPoint) {
+        this.endPoint = endPoint;
+    }
 
     public String getBaseUrl() {
         return baseUrl;

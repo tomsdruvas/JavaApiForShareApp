@@ -1,4 +1,4 @@
-package com.example.demo.shareItem;
+package com.example.demo.webClient;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.client.WebClient;

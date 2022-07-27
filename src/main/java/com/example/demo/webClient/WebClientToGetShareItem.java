@@ -1,4 +1,4 @@
-package com.example.demo.shareItem;
+package com.example.demo.webClient;
 
 
 import lombok.RequiredArgsConstructor;
@@ -15,10 +15,11 @@ public class WebClientToGetShareItem {
 
     public String getShareItemFromApiBySymbol(String symbol) {
         String baseUrl = properties.getBaseUrl();
+        String endPoint = properties.getEndPoint();
 
         return webClient
                 .get()
-                .uri(baseUrl + "/query?function=GLOBAL_QUOTE&symbol={symbol}&apikey=undefined", symbol)
+                .uri(baseUrl + endPoint, symbol)
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();

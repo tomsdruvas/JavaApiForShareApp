@@ -1,4 +1,4 @@
-package com.example.demo.shareItem;
+package com.example.demo.webClient;
 
 
 import com.fasterxml.jackson.databind.JsonNode;
@@ -43,6 +43,7 @@ public class WebClientTestWireMockTest {
 
         WebClientToGetShareItemProperties properties = new WebClientToGetShareItemProperties();
         properties.setBaseUrl(wireMockServer.baseUrl());
+        properties.setEndPoint(WebClientUrlEnum.GLOBAL_QUOTE.getUrl());
 
         webClientToGetShareItem = new WebClientToGetShareItem(WebClient.create(), properties);
     }

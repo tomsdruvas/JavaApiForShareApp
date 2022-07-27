@@ -1,4 +1,4 @@
-package com.example.demo.shareItem;
+package com.example.demo.webClient;
 
 
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -32,6 +32,7 @@ class WebClientToGetShareItemTest {
 
                 WebClientToGetShareItemProperties properties = new WebClientToGetShareItemProperties();
                 properties.setBaseUrl(mockWebServer.url("/").url().toString());
+                properties.setEndPoint(WebClientUrlEnum.GLOBAL_QUOTE.getUrl());
 
                 webClientToGetShareItem = new WebClientToGetShareItem(WebClient.create(), properties);
             }

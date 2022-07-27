@@ -1,17 +1,15 @@
 package com.example.demo.shareItem;
 
-import com.fasterxml.jackson.databind.JsonNode;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 
 import java.io.IOException;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/shareitem")
-
 public class ShareItemController {
 
 
