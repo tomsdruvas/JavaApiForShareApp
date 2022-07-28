@@ -57,20 +57,22 @@ public class WebClientTestWireMockTest {
     public void test_getShareItemInfo() throws Exception {
 
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode expected = mapper.readTree(getJson("mock-api-call-response.json"));
+        JsonNode actual = mapper.readTree(getJson("mock-api-call-response.json"));
 
         wireMockServer.stubFor(get("/query?function=GLOBAL_QUOTE&symbol=AMZN&apikey=undefined").willReturn(
                         WireMock.aResponse()
                                 .withStatus(HttpStatus.OK.value())
                                 .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                                .withJsonBody(expected)
+                                .withJsonBody(actual)
                 )
         );
 
         String response = webClientToGetShareItem.getShareItemFromApiBySymbol("AMZN");
-        JsonNode actual = mapper.readTree(response);
+        JsonNode expected = mapper.readTree(response);
 
-        assertEquals(actual, expected);
+        assertEquals(expected, actual);
+        assertEquals(expected.get("Global Quote").get("05. price").asText(), "121.1400");
+
         wireMockServer.verify(getRequestedFor(urlEqualTo("/query?function=GLOBAL_QUOTE&symbol=AMZN&apikey=undefined")));
     }
 
