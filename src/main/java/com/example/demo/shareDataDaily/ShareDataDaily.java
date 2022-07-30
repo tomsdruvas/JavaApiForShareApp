@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Table
 @Getter
 @Setter
-public class shareDataDaily {
+public class ShareDataDaily {
 
     @Id
     @SequenceGenerator(
@@ -30,8 +30,9 @@ public class shareDataDaily {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
     @Column(columnDefinition = "JSON")
-    private String DailyData;
-//    @Column
-//    private ShareItem shareItem;
+    private String dailyData;
+    @OneToOne(mappedBy = "shareDataDaily")
+    private ShareItem shareItem;
+
 
 }

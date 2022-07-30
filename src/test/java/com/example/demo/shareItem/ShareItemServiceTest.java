@@ -1,8 +1,8 @@
 package com.example.demo.shareItem;
 
+import com.example.demo.utils.ShareObjectMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
@@ -37,8 +37,8 @@ class ShareItemServiceTest {
 
     @Test
     void testShareItemObjectMapper() throws JsonProcessingException {
-        String mockData = getJson("mock-api-call-response.json");
-        ShareItem actual = underTest.shareItemObjectMapper(mockData);
+        String mockData = getJson("mock-api-call-response-share-item.json");
+        ShareItem actual = ShareObjectMapper.shareItemObjectMapper(mockData);
         assertEquals(actual.getPrice().toString(), "121.14");
     }
 

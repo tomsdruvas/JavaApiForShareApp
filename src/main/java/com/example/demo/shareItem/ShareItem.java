@@ -1,5 +1,6 @@
 package com.example.demo.shareItem;
 
+import com.example.demo.shareDataDaily.ShareDataDaily;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -30,6 +31,10 @@ public class ShareItem {
     private Double price;
     @Column(nullable = false)
     private LocalDateTime updatedAt;
+
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(nullable = true)
+    private ShareDataDaily shareDataDaily;
 
     public ShareItem() {
     }

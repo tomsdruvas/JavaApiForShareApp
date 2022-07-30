@@ -48,7 +48,7 @@ class WebClientToGetShareItemTest {
                 mockWebServer.enqueue(
                         new MockResponse().setResponseCode(200)
                                 .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                                .setBody(getJson("mock-api-call-response.json"))
+                                .setBody(getJson("mock-api-call-response-share-item.json"))
                 );
 
                 webClientToGetShareItem.getShareItemFromApiBySymbol("AMZN");
@@ -66,13 +66,13 @@ class WebClientToGetShareItemTest {
                 mockWebServer.enqueue(
                         new MockResponse().setResponseCode(200)
                                 .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                                .setBody(getJson("mock-api-call-response.json"))
+                                .setBody(getJson("mock-api-call-response-share-item.json"))
                 );
 
                 String result = webClientToGetShareItem.getShareItemFromApiBySymbol("AMZN");
                 ObjectMapper mapper = new ObjectMapper();
 
-                assertEquals(mapper.readTree(getJson("mock-api-call-response.json")), mapper.readTree(result));
+                assertEquals(mapper.readTree(getJson("mock-api-call-response-share-item.json")), mapper.readTree(result));
 
             }
 

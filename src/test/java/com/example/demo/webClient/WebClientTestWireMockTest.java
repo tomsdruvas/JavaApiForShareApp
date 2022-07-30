@@ -57,7 +57,7 @@ public class WebClientTestWireMockTest {
     public void test_getShareItemInfo() throws Exception {
 
         ObjectMapper mapper = new ObjectMapper();
-        JsonNode actual = mapper.readTree(getJson("mock-api-call-response.json"));
+        JsonNode actual = mapper.readTree(getJson("mock-api-call-response-share-item.json"));
 
         wireMockServer.stubFor(get("/query?function=GLOBAL_QUOTE&symbol=AMZN&apikey=undefined").willReturn(
                         WireMock.aResponse()

@@ -1,5 +1,7 @@
 package com.example.demo.shareItem;
 
+import com.example.demo.shareDataDaily.ShareDataDaily;
+import com.example.demo.utils.ShareObjectMapper;
 import com.example.demo.webClient.WebClientToGetShareItem;
 import com.example.demo.webClient.WebClientToGetShareItemProperties;
 import com.example.demo.webClient.WebClientUrlEnum;
@@ -29,23 +31,6 @@ public class ShareItemService {
         return shareItemRepository.findAll();
     }
 
-
-
-    public ShareItem shareItemObjectMapper(String response) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode shareItemObject = mapper.readTree(response).get("Global Quote");
-        ShareItem shareItem = new ShareItem();
-        shareItem.setName(shareItemObject.get("01. symbol").asText());
-        shareItem.setSymbol(shareItemObject.get("01. symbol").asText());
-        shareItem.setPrice(shareItemObject.get("05. price").asDouble());
-        shareItem.setUpdatedAt(LocalDateTime.now());
-
-        return shareItem;
-    }
-
-
-
-
     public ShareItem getShareItem(String symbol) throws IOException, InterruptedException {
         boolean doesSymbolExistInDb = shareItemRepository.existsBySymbol(symbol);
         if (doesSymbolExistInDb){
@@ -58,7 +43,7 @@ public class ShareItemService {
 
         WebClientToGetShareItem webClientToGetShareItem = new WebClientToGetShareItem(WebClient.create(), properties);
 
-        ShareItem shareItem = shareItemObjectMapper(webClientToGetShareItem.getShareItemFromApiBySymbol(symbol));
+        ShareItem shareItem = ShareObjectMapper.shareItemObjectMapper(webClientToGetShareItem.getShareItemFromApiBySymbol(symbol));
         return shareItemRepository.save(shareItem);
     }
 }
