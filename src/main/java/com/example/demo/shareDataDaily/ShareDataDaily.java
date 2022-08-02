@@ -2,8 +2,16 @@ package com.example.demo.shareDataDaily;
 
 
 import com.example.demo.shareItem.ShareItem;
+import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
+import com.vladmihalcea.hibernate.type.json.JsonStringType;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
+import org.hibernate.annotations.TypeDefs;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -12,6 +20,12 @@ import java.time.LocalDateTime;
 @Table
 @Getter
 @Setter
+@NoArgsConstructor
+@AllArgsConstructor
+@TypeDefs({
+        @TypeDef(name = "json", typeClass = JsonStringType.class),
+        @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
+})
 public class ShareDataDaily {
 
     @Id
@@ -29,10 +43,17 @@ public class ShareDataDaily {
     private String symbol;
     @Column(nullable = false)
     private LocalDateTime updatedAt;
-    @Column(columnDefinition = "JSON")
-    private String dailyData;
+//    @Type(type = "json")
+//    @Column(columnDefinition = "json")
+//    private String dailyData;
     @OneToOne(mappedBy = "shareDataDaily")
     private ShareItem shareItem;
 
 
+    public ShareDataDaily(String symbol, LocalDateTime updatedAt, ShareItem shareItem) {
+        this.symbol = symbol;
+        this.updatedAt = updatedAt;
+//        this.dailyData = dailyData;
+        this.shareItem = shareItem;
+    }
 }

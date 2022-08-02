@@ -1,5 +1,6 @@
 package com.example.demo.shareItem;
 
+import com.example.demo.shareDataDaily.ShareDataDailyRepository;
 import com.example.demo.utils.ShareObjectMapper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.BeforeEach;

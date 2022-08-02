@@ -1,19 +1,16 @@
 package com.example.demo.shareItem;
 
 import com.example.demo.shareDataDaily.ShareDataDaily;
+import com.example.demo.shareDataDaily.ShareDataDailyRepository;
 import com.example.demo.utils.ShareObjectMapper;
-import com.example.demo.webClient.WebClientToGetShareItem;
+import com.example.demo.webClient.WebClientToGetAPI;
 import com.example.demo.webClient.WebClientToGetShareItemProperties;
 import com.example.demo.webClient.WebClientUrlEnum;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -24,6 +21,7 @@ public class ShareItemService {
     @Autowired
     public ShareItemService(ShareItemRepository shareItemRepository) {
         this.shareItemRepository = shareItemRepository;
+
 
     }
 
@@ -41,9 +39,17 @@ public class ShareItemService {
         properties.setBaseUrl(WebClientUrlEnum.BASE_URL.getUrl());
         properties.setEndPoint(WebClientUrlEnum.GLOBAL_QUOTE.getUrl());
 
-        WebClientToGetShareItem webClientToGetShareItem = new WebClientToGetShareItem(WebClient.create(), properties);
+        WebClientToGetAPI webClientToGetAPI = new WebClientToGetAPI(WebClient.create(), properties);
 
-        ShareItem shareItem = ShareObjectMapper.shareItemObjectMapper(webClientToGetShareItem.getShareItemFromApiBySymbol(symbol));
+        ShareItem shareItem = ShareObjectMapper.shareItemObjectMapper(webClientToGetAPI.getShareInfoFromApiBySymbol(symbol));
+
+        properties.setEndPoint(WebClientUrlEnum.DAILY_DATA.getUrl());
+        WebClientToGetAPI webClientToGetDaily = new WebClientToGetAPI(WebClient.create(), properties);
+        ShareDataDaily shareDataDaily = ShareObjectMapper.shareDataObjectMapper(webClientToGetDaily.getShareInfoFromApiBySymbol(symbol));
+        shareItem.setShareDataDaily(shareDataDaily);
+
+
+
         return shareItemRepository.save(shareItem);
     }
 }

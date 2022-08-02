@@ -10,14 +10,14 @@ import java.time.LocalDateTime;
 
 public class ShareObjectMapper {
 
-    public ShareDataDaily shareDataObjectMapper(String response) throws JsonProcessingException {
+    public static ShareDataDaily shareDataObjectMapper(String response) throws JsonProcessingException {
         ObjectMapper mapper = new ObjectMapper();
         JsonNode shareDataObject = mapper.readTree(response);
         ShareDataDaily shareDataDaily = new ShareDataDaily();
 
         shareDataDaily.setSymbol(shareDataObject.get("Meta Data").get("2. Symbol").asText());
         shareDataDaily.setUpdatedAt(LocalDateTime.now());
-        shareDataDaily.setDailyData(shareDataObject.get("Time Series (Daily)").asText());
+//        shareDataDaily.setDailyData(shareDataObject.get("Time Series (Daily)").asText());
 
         return shareDataDaily;
     }

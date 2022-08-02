@@ -7,13 +7,13 @@ import org.springframework.web.reactive.function.client.WebClient;
 
 @Component
 @RequiredArgsConstructor
-public class WebClientToGetShareItem {
+public class WebClientToGetAPI {
 
     private final WebClient webClient;
     private final WebClientToGetShareItemProperties properties;
 
 
-    public String getShareItemFromApiBySymbol(String symbol) {
+    public String getShareInfoFromApiBySymbol(String symbol) {
         String baseUrl = properties.getBaseUrl();
         String endPoint = properties.getEndPoint();
 

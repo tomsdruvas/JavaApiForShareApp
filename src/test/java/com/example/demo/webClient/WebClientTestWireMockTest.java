@@ -33,7 +33,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class WebClientTestWireMockTest {
     private WireMockServer wireMockServer;
 
-    private WebClientToGetShareItem webClientToGetShareItem;
+    private WebClientToGetAPI webClientToGetAPI;
 
     @BeforeEach
     public void setup() {
@@ -45,7 +45,7 @@ public class WebClientTestWireMockTest {
         properties.setBaseUrl(wireMockServer.baseUrl());
         properties.setEndPoint(WebClientUrlEnum.GLOBAL_QUOTE.getUrl());
 
-        webClientToGetShareItem = new WebClientToGetShareItem(WebClient.create(), properties);
+        webClientToGetAPI = new WebClientToGetAPI(WebClient.create(), properties);
     }
 
     @AfterEach
@@ -67,7 +67,7 @@ public class WebClientTestWireMockTest {
                 )
         );
 
-        String response = webClientToGetShareItem.getShareItemFromApiBySymbol("AMZN");
+        String response = webClientToGetAPI.getShareInfoFromApiBySymbol("AMZN");
         JsonNode expected = mapper.readTree(response);
 
         assertEquals(expected, actual);

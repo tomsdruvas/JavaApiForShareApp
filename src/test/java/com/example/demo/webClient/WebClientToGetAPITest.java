@@ -20,11 +20,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 
-class WebClientToGetShareItemTest {
+class WebClientToGetAPITest {
 
             private static MockWebServer mockWebServer;
 
-            private WebClientToGetShareItem webClientToGetShareItem;
+            private WebClientToGetAPI webClientToGetAPI;
 
             @BeforeEach
             void setupMockWebServer() {
@@ -34,7 +34,7 @@ class WebClientToGetShareItemTest {
                 properties.setBaseUrl(mockWebServer.url("/").url().toString());
                 properties.setEndPoint(WebClientUrlEnum.GLOBAL_QUOTE.getUrl());
 
-                webClientToGetShareItem = new WebClientToGetShareItem(WebClient.create(), properties);
+                webClientToGetAPI = new WebClientToGetAPI(WebClient.create(), properties);
             }
 
             @AfterAll
@@ -51,7 +51,7 @@ class WebClientToGetShareItemTest {
                                 .setBody(getJson("mock-api-call-response-share-item.json"))
                 );
 
-                webClientToGetShareItem.getShareItemFromApiBySymbol("AMZN");
+                webClientToGetAPI.getShareInfoFromApiBySymbol("AMZN");
 
                 RecordedRequest request = mockWebServer.takeRequest();
 
@@ -69,7 +69,7 @@ class WebClientToGetShareItemTest {
                                 .setBody(getJson("mock-api-call-response-share-item.json"))
                 );
 
-                String result = webClientToGetShareItem.getShareItemFromApiBySymbol("AMZN");
+                String result = webClientToGetAPI.getShareInfoFromApiBySymbol("AMZN");
                 ObjectMapper mapper = new ObjectMapper();
 
                 assertEquals(mapper.readTree(getJson("mock-api-call-response-share-item.json")), mapper.readTree(result));
