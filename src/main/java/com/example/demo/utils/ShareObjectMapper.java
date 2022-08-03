@@ -2,9 +2,6 @@ package com.example.demo.utils;
 
 import com.example.demo.shareDataDaily.ShareDataDaily;
 import com.example.demo.shareItem.ShareItem;
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.json.JSONObject;
 
 import java.time.LocalDateTime;
@@ -27,13 +24,12 @@ public class ShareObjectMapper {
 
     }
 
-    public static ShareItem shareItemObjectMapper(String response) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode shareItemObject = mapper.readTree(response).get("Global Quote");
+    public static ShareItem shareItemObjectMapper(String response) {
+        JSONObject dailyDataJsonObj = new JSONObject(response).getJSONObject("Global Quote");
         ShareItem shareItem = new ShareItem();
-        shareItem.setName(shareItemObject.get("01. symbol").asText());
-        shareItem.setSymbol(shareItemObject.get("01. symbol").asText());
-        shareItem.setPrice(shareItemObject.get("05. price").asDouble());
+        shareItem.setName(dailyDataJsonObj.getString("01. symbol"));
+        shareItem.setSymbol(dailyDataJsonObj.getString("01. symbol"));
+        shareItem.setPrice(dailyDataJsonObj.getDouble("05. price"));
         shareItem.setUpdatedAt(LocalDateTime.now());
 
         return shareItem;

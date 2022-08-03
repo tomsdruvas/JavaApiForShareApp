@@ -2,7 +2,6 @@ package com.example.demo.utils;
 
 import com.example.demo.shareDataDaily.ShareDataDaily;
 import com.example.demo.shareItem.ShareItem;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
 
 
@@ -26,7 +25,7 @@ class ShareObjectMapperTest {
     }
 
     @Test
-    void testShareItemObjectMapper() throws JsonProcessingException {
+    void testShareItemObjectMapper() {
         String mockData = getJson("mock-api-call-response-share-item.json");
         ShareItem actual = ShareObjectMapper.shareItemObjectMapper(mockData);
         assertEquals(actual.getPrice().toString(), "121.14");
