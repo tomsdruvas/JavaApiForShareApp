@@ -43,10 +43,10 @@ public class ShareItemService {
 
         ShareItem shareItem = ShareObjectMapper.shareItemObjectMapper(webClientToGetAPI.getShareInfoFromApiBySymbol(symbol));
 
-        properties.setEndPoint(WebClientUrlEnum.DAILY_DATA.getUrl());
-        WebClientToGetAPI webClientToGetDaily = new WebClientToGetAPI(WebClient.create(), properties);
-        ShareDataDaily shareDataDaily = ShareObjectMapper.shareDataObjectMapper(webClientToGetDaily.getShareInfoFromApiBySymbol(symbol));
-        shareItem.setShareDataDaily(shareDataDaily);
+//        properties.setEndPoint(WebClientUrlEnum.DAILY_DATA.getUrl());
+//        WebClientToGetAPI webClientToGetDaily = new WebClientToGetAPI(WebClient.create(), properties);
+//        ShareDataDaily shareDataDaily = ShareObjectMapper.shareDataObjectMapper(webClientToGetDaily.getShareInfoFromApiBySymbol(symbol));
+//        shareItem.setShareDataDaily(shareDataDaily);
 
 
 

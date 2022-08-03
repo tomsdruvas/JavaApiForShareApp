@@ -5,21 +5,26 @@ import com.example.demo.shareItem.ShareItem;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.json.JSONObject;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class ShareObjectMapper {
 
-    public static ShareDataDaily shareDataObjectMapper(String response) throws JsonProcessingException {
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode shareDataObject = mapper.readTree(response);
-        ShareDataDaily shareDataDaily = new ShareDataDaily();
+    public static List<ShareDataDaily> shareDataObjectMapper(String response){
+        JSONObject dailyDataJsonObj = new JSONObject(response);
 
-        shareDataDaily.setSymbol(shareDataObject.get("Meta Data").get("2. Symbol").asText());
-        shareDataDaily.setUpdatedAt(LocalDateTime.now());
-//        shareDataDaily.setDailyData(shareDataObject.get("Time Series (Daily)").asText());
+        String symbolFromObj = dailyDataJsonObj.getJSONObject("Meta Data").getString("2. Symbol");
+        JSONObject timeSeriesDailyJsonObj = dailyDataJsonObj.getJSONObject("Time Series (Daily)");
 
-        return shareDataDaily;
+        List<ShareDataDaily> listOfData = timeSeriesDailyJsonObj.keySet().stream()
+                .map(date -> new ShareDataDaily(symbolFromObj, date, timeSeriesDailyJsonObj.getJSONObject(date).getDouble("1. open")))
+                .collect(Collectors.toList());
+
+        return listOfData;
+
     }
 
     public static ShareItem shareItemObjectMapper(String response) throws JsonProcessingException {

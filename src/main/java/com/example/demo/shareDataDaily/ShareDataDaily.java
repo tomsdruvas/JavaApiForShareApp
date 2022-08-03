@@ -1,20 +1,12 @@
 package com.example.demo.shareDataDaily;
 
-
-import com.example.demo.shareItem.ShareItem;
-import com.vladmihalcea.hibernate.type.json.JsonBinaryType;
-import com.vladmihalcea.hibernate.type.json.JsonStringType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import org.hibernate.annotations.Type;
-import org.hibernate.annotations.TypeDef;
-import org.hibernate.annotations.TypeDefs;
-
 import javax.persistence.*;
-import java.time.LocalDateTime;
+
 
 @Entity
 @Table
@@ -22,10 +14,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@TypeDefs({
-        @TypeDef(name = "json", typeClass = JsonStringType.class),
-        @TypeDef(name = "jsonb", typeClass = JsonBinaryType.class)
-})
+
 public class ShareDataDaily {
 
     @Id
@@ -39,21 +28,16 @@ public class ShareDataDaily {
             generator = "sharedatadaily_sequence"
     )
     private Long id;
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String symbol;
     @Column(nullable = false)
-    private LocalDateTime updatedAt;
-//    @Type(type = "json")
-//    @Column(columnDefinition = "json")
-//    private String dailyData;
-    @OneToOne(mappedBy = "shareDataDaily")
-    private ShareItem shareItem;
+    private String date;
+    @Column
+    private Double openPrice;
 
-
-    public ShareDataDaily(String symbol, LocalDateTime updatedAt, ShareItem shareItem) {
+    public ShareDataDaily(String symbol, String date, Double openPrice) {
         this.symbol = symbol;
-        this.updatedAt = updatedAt;
-//        this.dailyData = dailyData;
-        this.shareItem = shareItem;
+        this.date = date;
+        this.openPrice = openPrice;
     }
 }
