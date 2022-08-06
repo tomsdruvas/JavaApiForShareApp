@@ -1,5 +1,7 @@
 package com.example.demo.investment;
 
+import com.example.demo.shareItem.ShareItem;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,4 +27,18 @@ public class Investment {
             generator = "investment_sequence"
     )
     private Long id;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
+    private ShareItem shareItem;
+
+    @Column
+    private Double quantity;
+
+    @Column
+    private Double entryPrice;
+
+    @Column
+    private String entryDate;
+
 }

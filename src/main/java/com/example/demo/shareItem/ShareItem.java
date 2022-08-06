@@ -41,9 +41,9 @@ public class ShareItem {
     private LocalDateTime updatedAt;
 
     @OneToMany
+    @JoinColumn(name = "share_item_id")
     @OrderBy("date")
-    @JoinColumn
-    private List<ShareDataDaily> shareDataDailies = new ArrayList<ShareDataDaily>();
+    private List<ShareDataDaily> shareDataDailies;
 
 
     public ShareItem(Long id, String name, String symbol, Double price, LocalDateTime updatedAt) {
