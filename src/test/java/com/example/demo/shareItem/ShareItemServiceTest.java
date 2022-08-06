@@ -21,8 +21,9 @@ class ShareItemServiceTest {
 
     @BeforeEach
     void setUp() {
-
         underTest = new ShareItemService(shareItemRepository, shareDataDailyRepository);
+
+        
 
     }
 

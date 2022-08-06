@@ -29,7 +29,7 @@ public class ShareItemService {
         return shareItemRepository.findAll();
     }
 
-    public ShareItem getShareItem(String symbol) throws IOException, InterruptedException {
+    public ShareItem getShareItem(String symbol) {
         boolean doesSymbolExistInDb = shareItemRepository.existsBySymbol(symbol);
         if (doesSymbolExistInDb){
             return shareItemRepository.findShareItemBySymbol(symbol);
