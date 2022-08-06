@@ -1,6 +1,8 @@
 package com.example.demo.webClient;
 
 
+import com.example.demo.shareItem.ShareItem;
+import com.example.demo.utils.ShareObjectMapper;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.WireMockServer;
@@ -68,6 +70,7 @@ public class WebClientTestWireMockTest {
         );
 
         String response = webClientToGetAPI.getShareInfoFromApiBySymbol("AMZN");
+
         JsonNode expected = mapper.readTree(response);
 
         assertEquals(expected, actual);

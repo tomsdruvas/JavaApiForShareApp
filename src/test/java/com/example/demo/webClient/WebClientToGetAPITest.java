@@ -62,7 +62,7 @@ class WebClientToGetAPITest {
 
 
             @Test
-            void outputShouldMatchMockData() throws InterruptedException, JsonProcessingException {
+            void outputShouldMatchMockData() throws JsonProcessingException {
                 mockWebServer.enqueue(
                         new MockResponse().setResponseCode(200)
                                 .setHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
