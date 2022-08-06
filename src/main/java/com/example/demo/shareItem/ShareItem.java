@@ -41,7 +41,7 @@ public class ShareItem {
 
     @OneToMany
     @OrderBy("date")
-    @Column(nullable = false)
+    @Column
     private List<ShareDataDaily> shareDataDailies;
 
 
