@@ -16,14 +16,15 @@ class ShareItemServiceTest {
     @Mock
     private ShareItemRepository shareItemRepository;
     @Mock
-    ShareDataDailyRepository shareDataDailyRepository;
+    private ShareDataDailyRepository shareDataDailyRepository;
     private ShareItemService underTest;
 
     @BeforeEach
     void setUp() {
         underTest = new ShareItemService(shareItemRepository, shareDataDailyRepository);
 
-        
+
+
 
     }
 
