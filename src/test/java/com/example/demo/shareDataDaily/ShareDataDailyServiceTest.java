@@ -31,5 +31,5 @@ class ShareDataDailyServiceTest {
             underTest.getShareDataDaily("AMZN");
             verify(shareDataDailyRepository).findShareDataDailyBySymbol("AMZN");
         }
-        
+
 }

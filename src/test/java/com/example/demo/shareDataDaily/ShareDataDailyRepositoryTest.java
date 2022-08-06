@@ -10,6 +10,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -29,9 +30,16 @@ class ShareDataDailyRepositoryTest {
         underTest2.save(shareItem);
         ShareDataDaily shareDataDaily1 = new ShareDataDaily("AMZN", "2022-08-01", 20.51, shareItem);
         ShareDataDaily shareDataDaily = new ShareDataDaily("AMZN", "2022-08-02", 20.56, shareItem);
+        List<ShareDataDaily> listOfDailyPrices = new ArrayList<>();
+        listOfDailyPrices.add(shareDataDaily);
+        listOfDailyPrices.add(shareDataDaily1);
 
         underTest.save(shareDataDaily1);
         underTest.save(shareDataDaily);
+
+        shareItem.setShareDataDailies(listOfDailyPrices);
+        underTest2.save(shareItem);
+
 
     }
 
@@ -52,6 +60,15 @@ class ShareDataDailyRepositoryTest {
         assertThat(foundInDB.size()).isEqualTo(2);
         assertThat(notfoundInDB.size()).isEqualTo(0);
 
+    }
+
+    @Test
+    void shouldBeAbleToGetDataFromShareITem(){
+        ShareItem shareItem = underTest2.findShareItemBySymbol("AMZN");
+        List<ShareDataDaily> shareDataDaily = shareItem.getShareDataDailies();
+
+        assertThat(shareItem.getSymbol()).isEqualTo("AMZN");
+        assertThat(shareDataDaily.size()).isEqualTo(2);
     }
 
 }
