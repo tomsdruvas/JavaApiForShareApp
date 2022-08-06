@@ -4,9 +4,13 @@ import com.example.demo.shareDataDaily.ShareDataDaily;
 import com.example.demo.shareItem.ShareItem;
 import org.json.JSONObject;
 
+import java.sql.Date;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Locale;
 import java.util.stream.Collectors;
 
 public class ShareObjectMapper {
@@ -18,7 +22,7 @@ public class ShareObjectMapper {
         JSONObject timeSeriesDailyJsonObj = dailyDataJsonObj.getJSONObject("Time Series (Daily)");
 
         List<ShareDataDaily> listOfData = timeSeriesDailyJsonObj.keySet().stream()
-                .map(date -> new ShareDataDaily(symbolFromObj, date, timeSeriesDailyJsonObj.getJSONObject(date).getDouble("1. open"), shareItem))
+                .map(date -> new ShareDataDaily(symbolFromObj, Date.valueOf(date), timeSeriesDailyJsonObj.getJSONObject(date).getDouble("1. open"), shareItem))
                 .sorted(Comparator.comparing(ShareDataDaily::getDate))
                 .collect(Collectors.toList());
 

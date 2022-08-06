@@ -1,4 +1,4 @@
-package com.example.demo.investment;
+package com.example.demo.portfolio;
 
 import com.example.demo.shareItem.ShareItem;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -15,33 +15,29 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Investment {
+public class Portfolio {
 
     @Id
 
     @SequenceGenerator(
-            name = "investment_sequence",
-            sequenceName = "investment_sequence",
+            name = "portfolio_sequence",
+            sequenceName = "portfolio_sequence",
             allocationSize = 1
     )
     @GeneratedValue(
             strategy = GenerationType.SEQUENCE,
-            generator = "investment_sequence"
+            generator = "portfolio_sequence"
     )
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
-    private ShareItem shareItem;
-
     @Column
-    private Double quantity;
-
-    @Column
-    private Double entryPrice;
+    private String name;
 
     @Column
     @JsonFormat(pattern = "dd/MM/yyyy")
-    private Date entryDate;
+    private Date createdDate;
+
+
+
 
 }

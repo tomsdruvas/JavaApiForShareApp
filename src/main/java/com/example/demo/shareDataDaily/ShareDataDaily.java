@@ -1,6 +1,7 @@
 package com.example.demo.shareDataDaily;
 
 import com.example.demo.shareItem.ShareItem;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,6 +11,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.Date;
 
 
 @Entity
@@ -36,7 +38,8 @@ public class ShareDataDaily {
     @Column(nullable = false)
     private String symbol;
     @Column(nullable = false)
-    private String date;
+    @JsonFormat(pattern = "dd/MM/yyyy")
+    private Date date;
     @Column
     private Double openPrice;
 
@@ -44,7 +47,7 @@ public class ShareDataDaily {
     @JsonIgnore
     private ShareItem shareItem;
 
-    public ShareDataDaily(String symbol, String date, Double openPrice, ShareItem shareItem) {
+    public ShareDataDaily(String symbol, Date date, Double openPrice, ShareItem shareItem) {
         this.symbol = symbol;
         this.date = date;
         this.openPrice = openPrice;

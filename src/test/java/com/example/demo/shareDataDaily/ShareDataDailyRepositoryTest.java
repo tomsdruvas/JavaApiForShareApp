@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,8 +29,8 @@ class ShareDataDailyRepositoryTest {
     void setUp() {
         ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, LocalDateTime.now());
         underTest2.save(shareItem);
-        ShareDataDaily shareDataDaily1 = new ShareDataDaily("AMZN", "2022-08-01", 20.51, shareItem);
-        ShareDataDaily shareDataDaily = new ShareDataDaily("AMZN", "2022-08-02", 20.56, shareItem);
+        ShareDataDaily shareDataDaily1 = new ShareDataDaily("AMZN", Date.valueOf("2022-08-01"), 20.51, shareItem);
+        ShareDataDaily shareDataDaily = new ShareDataDaily("AMZN", Date.valueOf("2022-08-02"), 20.56, shareItem);
         List<ShareDataDaily> listOfDailyPrices = new ArrayList<>();
         listOfDailyPrices.add(shareDataDaily);
         listOfDailyPrices.add(shareDataDaily1);
