@@ -6,13 +6,16 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Set;
 
 @Entity
-@Table
+@Table(name = "share_item")
 @Getter
 @Setter
 public class ShareItem {
     @Id
+
     @SequenceGenerator(
             name = "shareitem_sequence",
             sequenceName = "shareitem_sequence",
@@ -32,9 +35,8 @@ public class ShareItem {
     @Column(nullable = false)
     private LocalDateTime updatedAt;
 
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(nullable = true)
-    private ShareDataDaily shareDataDaily;
+    @OneToMany
+    private List<ShareDataDaily> shareDataDailies;
 
     public ShareItem() {
     }
