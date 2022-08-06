@@ -7,7 +7,10 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Entity
@@ -39,8 +42,8 @@ public class ShareItem {
 
     @OneToMany
     @OrderBy("date")
-    @Column
-    private List<ShareDataDaily> shareDataDailies;
+    @JoinColumn
+    private List<ShareDataDaily> shareDataDailies = new ArrayList<ShareDataDaily>();
 
 
     public ShareItem(Long id, String name, String symbol, Double price, LocalDateTime updatedAt) {

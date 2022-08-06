@@ -41,8 +41,6 @@ public class ShareDataDaily {
     private Double openPrice;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn
-    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private ShareItem shareItem;
 
