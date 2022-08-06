@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -24,10 +25,10 @@ class ShareDataDailyRepositoryTest {
 
     @BeforeEach
     void setUp() {
-//        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, LocalDateTime.now());
-//        underTest2.save(shareItem);
-        ShareDataDaily shareDataDaily1 = new ShareDataDaily("AMZN", "2022-08-01", 20.51);
-        ShareDataDaily shareDataDaily = new ShareDataDaily("AMZN", "2022-08-02", 20.56);
+        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, LocalDateTime.now());
+        underTest2.save(shareItem);
+        ShareDataDaily shareDataDaily1 = new ShareDataDaily("AMZN", "2022-08-01", 20.51, shareItem);
+        ShareDataDaily shareDataDaily = new ShareDataDaily("AMZN", "2022-08-02", 20.56, shareItem);
 
         underTest.save(shareDataDaily1);
         underTest.save(shareDataDaily);
@@ -41,7 +42,7 @@ class ShareDataDailyRepositoryTest {
 
 
     @Test
-    void itShouldFindShareItemBySymbol() {
+    void itShouldFindShareDataDailyBySymbol() {
 
         List<ShareDataDaily> foundInDB = underTest.findShareDataDailyBySymbol("AMZN");
         List<ShareDataDaily> notfoundInDB = underTest.findShareDataDailyBySymbol("MSFT");

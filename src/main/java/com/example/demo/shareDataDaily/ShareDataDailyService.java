@@ -23,16 +23,16 @@ public class ShareDataDailyService {
 
     public List<ShareDataDaily> getShareDataDaily(String symbol) {
 
-        WebClientToGetShareItemProperties properties = new WebClientToGetShareItemProperties();
-        properties.setBaseUrl(WebClientUrlEnum.BASE_URL.getUrl());
-        properties.setEndPoint(WebClientUrlEnum.DAILY_DATA.getUrl());
+//        WebClientToGetShareItemProperties properties = new WebClientToGetShareItemProperties();
+//        properties.setBaseUrl(WebClientUrlEnum.BASE_URL.getUrl());
+//        properties.setEndPoint(WebClientUrlEnum.DAILY_DATA.getUrl());
+//
+//        WebClientToGetAPI webClientToGetAPI = new WebClientToGetAPI(WebClient.create(), properties);
+//
+//        String dailyDataObj = webClientToGetAPI.getShareInfoFromApiBySymbol(symbol);
+//
+//        List<ShareDataDaily> listOfData = ShareObjectMapper.shareDataObjectMapper(dailyDataObj);
 
-        WebClientToGetAPI webClientToGetAPI = new WebClientToGetAPI(WebClient.create(), properties);
-
-        String dailyDataObj = webClientToGetAPI.getShareInfoFromApiBySymbol(symbol);
-
-        List<ShareDataDaily> listOfData = ShareObjectMapper.shareDataObjectMapper(dailyDataObj);
-
-        return shareDataDailyRepository.saveAll(listOfData);
+        return shareDataDailyRepository.findShareDataDailyBySymbol(symbol);
     }
 }

@@ -1,8 +1,11 @@
 package com.example.demo.shareItem;
 
 import com.example.demo.shareDataDaily.ShareDataDaily;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.springframework.data.web.SortDefault;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -13,6 +16,7 @@ import java.util.Set;
 @Table(name = "share_item")
 @Getter
 @Setter
+@NoArgsConstructor
 public class ShareItem {
     @Id
 
@@ -36,10 +40,10 @@ public class ShareItem {
     private LocalDateTime updatedAt;
 
     @OneToMany
+    @OrderBy("date")
+    @Column(nullable = false)
     private List<ShareDataDaily> shareDataDailies;
 
-    public ShareItem() {
-    }
 
     public ShareItem(Long id, String name, String symbol, Double price, LocalDateTime updatedAt) {
         this.id = id;

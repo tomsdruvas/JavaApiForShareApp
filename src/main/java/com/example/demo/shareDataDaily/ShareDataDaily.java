@@ -31,6 +31,7 @@ public class ShareDataDaily {
             strategy = GenerationType.SEQUENCE,
             generator = "sharedatadaily_sequence"
     )
+    @JsonIgnore
     private Long id;
     @Column(nullable = false)
     private String symbol;
@@ -45,9 +46,11 @@ public class ShareDataDaily {
     @JsonIgnore
     private ShareItem shareItem;
 
-    public ShareDataDaily(String symbol, String date, Double openPrice) {
+    public ShareDataDaily(String symbol, String date, Double openPrice, ShareItem shareItem) {
         this.symbol = symbol;
         this.date = date;
         this.openPrice = openPrice;
+        this.shareItem = shareItem;
     }
+
 }

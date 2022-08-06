@@ -19,15 +19,19 @@ class ShareObjectMapperTest {
     void testShareDataObjectMapper() {
         String mockData = getJson("mock-api-call-response-share-data-daily.json");
         List<ShareDataDaily> listOfData;
-        listOfData = ShareObjectMapper.shareDataObjectMapper(mockData);
+
+        String mockDataShareItem = getJson("mock-api-call-response-share-item.json");
+        ShareItem shareItem = ShareObjectMapper.shareItemObjectMapper(mockDataShareItem);
+
+        listOfData = ShareObjectMapper.shareDataObjectMapper(mockData, shareItem);
         assertEquals(6, listOfData.size());
 
     }
 
     @Test
     void testShareItemObjectMapper() {
-        String mockData = getJson("mock-api-call-response-share-item.json");
-        ShareItem actual = ShareObjectMapper.shareItemObjectMapper(mockData);
+        String mockDataShareItem = getJson("mock-api-call-response-share-item.json");
+        ShareItem actual = ShareObjectMapper.shareItemObjectMapper(mockDataShareItem);
         assertEquals(actual.getPrice().toString(), "121.14");
     }
 

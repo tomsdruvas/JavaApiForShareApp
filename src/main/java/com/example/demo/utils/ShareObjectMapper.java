@@ -5,19 +5,21 @@ import com.example.demo.shareItem.ShareItem;
 import org.json.JSONObject;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class ShareObjectMapper {
 
-    public static List<ShareDataDaily> shareDataObjectMapper(String response){
+    public static List<ShareDataDaily> shareDataObjectMapper(String response, ShareItem shareItem){
         JSONObject dailyDataJsonObj = new JSONObject(response);
 
         String symbolFromObj = dailyDataJsonObj.getJSONObject("Meta Data").getString("2. Symbol");
         JSONObject timeSeriesDailyJsonObj = dailyDataJsonObj.getJSONObject("Time Series (Daily)");
 
         List<ShareDataDaily> listOfData = timeSeriesDailyJsonObj.keySet().stream()
-                .map(date -> new ShareDataDaily(symbolFromObj, date, timeSeriesDailyJsonObj.getJSONObject(date).getDouble("1. open")))
+                .map(date -> new ShareDataDaily(symbolFromObj, date, timeSeriesDailyJsonObj.getJSONObject(date).getDouble("1. open"), shareItem))
+                .sorted(Comparator.comparing(ShareDataDaily::getDate))
                 .collect(Collectors.toList());
 
         return listOfData;
