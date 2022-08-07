@@ -13,5 +13,4 @@ public interface ShareDataDailyRepository extends JpaRepository <ShareDataDaily,
 
 
     List<ShareDataDaily> findShareDataDailyBySymbol(String symbol);
-    boolean existsBySymbol(String symbol);
 }

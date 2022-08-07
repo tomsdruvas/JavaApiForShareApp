@@ -1,17 +1,14 @@
 package com.example.demo.portfolio;
 
 import com.example.demo.investment.Investment;
-import com.example.demo.shareDataDaily.ShareDataDaily;
-import com.example.demo.shareItem.ShareItem;
+import com.example.demo.investor.Investor;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table
@@ -40,12 +37,12 @@ public class Portfolio {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date createdDate;
 
-    @ManyToMany
-    @JoinTable(
-            name = "portfolio_holdings",
-            joinColumns = @JoinColumn(name = "portfolio_id"),
-            inverseJoinColumns = @JoinColumn(name = "investment_id"))
-    private List<Investment> investments;
+    @OneToMany
+    @JoinColumn(name = "portfolio_id")
+    private Set<Investment> investments;
+
+    @ManyToOne
+    private Investor investor;
 
 
     @Column

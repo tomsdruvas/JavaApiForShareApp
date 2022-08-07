@@ -10,7 +10,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+
 
 @Entity
 @Table
@@ -46,7 +46,7 @@ public class Investment {
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date entryDate;
 
-    @ManyToMany(mappedBy = "investments")
-    private List<Portfolio> portfolios;
+    @ManyToOne
+    private Portfolio portfolio;
 
 }
