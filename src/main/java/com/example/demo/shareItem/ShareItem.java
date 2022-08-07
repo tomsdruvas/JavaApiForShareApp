@@ -3,6 +3,7 @@ package com.example.demo.shareItem;
 import com.example.demo.shareDataDaily.ShareDataDaily;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -32,12 +33,16 @@ public class ShareItem {
     )
     private Long id;
     @Column(nullable = false, unique = true)
+    @NonNull
     private String name;
     @Column(nullable = false, unique = true)
+    @NonNull
     private String symbol;
     @Column(nullable = false)
+    @NonNull
     private Double price;
     @Column(nullable = false)
+    @NonNull
     private LocalDateTime updatedAt;
 
     @OneToMany

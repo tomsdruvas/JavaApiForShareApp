@@ -5,6 +5,7 @@ import com.example.demo.investor.Investor;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 import javax.persistence.*;
 import java.util.Date;
@@ -31,10 +32,12 @@ public class Portfolio {
     private Long id;
 
     @Column
+    @NonNull
     private String name;
 
     @Column
     @JsonFormat(pattern = "dd/MM/yyyy")
+    @NonNull
     private Date createdDate;
 
     @OneToMany
@@ -42,10 +45,12 @@ public class Portfolio {
     private Set<Investment> investments;
 
     @ManyToOne
+    @NonNull
     private Investor investor;
 
 
     @Column
+    @NonNull
     private Boolean isPublic;
 
 

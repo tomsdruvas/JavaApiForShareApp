@@ -8,7 +8,7 @@ public enum WebClientUrlEnum
     WEEKLY_DATA("/query?function=TIME_SERIES_WEEKLY&symbol={symbol}&apikey=undefined"),
     MONTHLY_DATA("/query?function=TIME_SERIES_MONTHLY&symbol={symbol}&apikey=undefined");
 
-    private String url;
+    private final String url;
 
     WebClientUrlEnum(String envUrl){
         this.url = envUrl;

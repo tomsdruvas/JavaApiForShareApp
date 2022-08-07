@@ -4,6 +4,7 @@ import com.example.demo.comment.Comment;
 import com.example.demo.portfolio.Portfolio;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -29,9 +30,11 @@ public class Investor {
     private Long id;
 
     @Column
+    @NonNull
     private String name;
 
     @Column
+    @NonNull
     private String email;
 
     @OneToMany

@@ -6,6 +6,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
 import lombok.Setter;
 
 import javax.persistence.*;
@@ -34,19 +35,24 @@ public class Investment {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
+    @NonNull
     private ShareItem shareItem;
 
     @Column
+    @NonNull
     private Double quantity;
 
     @Column
+    @NonNull
     private Double entryPrice;
 
     @Column
     @JsonFormat(pattern = "dd/MM/yyyy")
+    @NonNull
     private Date entryDate;
 
     @ManyToOne
+    @NonNull
     private Portfolio portfolio;
 
 }

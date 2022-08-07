@@ -3,10 +3,7 @@ package com.example.demo.shareDataDaily;
 import com.example.demo.shareItem.ShareItem;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -35,15 +32,19 @@ public class ShareDataDaily {
     @JsonIgnore
     private Long id;
     @Column(nullable = false)
+    @NonNull
     private String symbol;
     @Column(nullable = false)
     @JsonFormat(pattern = "dd/MM/yyyy")
+    @NonNull
     private Date date;
     @Column
+    @NonNull
     private Double openPrice;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JsonIgnore
+    @NonNull
     private ShareItem shareItem;
 
     public ShareDataDaily(String symbol, Date date, Double openPrice, ShareItem shareItem) {
