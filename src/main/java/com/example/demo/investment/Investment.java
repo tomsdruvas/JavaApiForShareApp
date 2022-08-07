@@ -1,5 +1,6 @@
 package com.example.demo.investment;
 
+import com.example.demo.portfolio.Portfolio;
 import com.example.demo.shareItem.ShareItem;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -9,6 +10,7 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table
@@ -43,5 +45,8 @@ public class Investment {
     @Column
     @JsonFormat(pattern = "dd/MM/yyyy")
     private Date entryDate;
+
+    @ManyToMany(mappedBy = "investments")
+    private List<Portfolio> portfolios;
 
 }
