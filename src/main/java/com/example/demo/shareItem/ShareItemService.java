@@ -60,6 +60,8 @@ public class ShareItemService {
 
         shareItem.setShareDataDailies(shareDataDailies);
 
-        return shareItemRepository.save(shareItem);
+        return shareItem;
     }
+
+
 }

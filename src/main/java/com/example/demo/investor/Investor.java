@@ -2,10 +2,7 @@ package com.example.demo.investor;
 
 import com.example.demo.comment.Comment;
 import com.example.demo.portfolio.Portfolio;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Set;
@@ -15,6 +12,8 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class Investor {
     @Id
 

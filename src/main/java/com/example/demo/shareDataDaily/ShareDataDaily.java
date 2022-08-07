@@ -32,6 +32,7 @@ public class ShareDataDaily {
     @JsonIgnore
     private Long id;
     @Column(nullable = false)
+    @JsonIgnore
     @NonNull
     private String symbol;
     @Column(nullable = false)
@@ -43,6 +44,7 @@ public class ShareDataDaily {
     private Double openPrice;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "share_item_id")
     @JsonIgnore
     @NonNull
     private ShareItem shareItem;

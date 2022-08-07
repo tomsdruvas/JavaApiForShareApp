@@ -10,7 +10,5 @@ import java.util.List;
 
 @Repository
 public interface ShareDataDailyRepository extends JpaRepository <ShareDataDaily, Long> {
-
-
     List<ShareDataDaily> findShareDataDailyBySymbol(String symbol);
 }

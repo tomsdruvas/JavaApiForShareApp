@@ -5,13 +5,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
+
 
 
 @Entity
@@ -45,8 +45,7 @@ public class ShareItem {
     @NonNull
     private LocalDateTime updatedAt;
 
-    @OneToMany
-    @JoinColumn(name = "share_item_id")
+    @OneToMany(mappedBy = "shareItem", fetch = FetchType.LAZY)
     @OrderBy("date")
     private List<ShareDataDaily> shareDataDailies;
 
