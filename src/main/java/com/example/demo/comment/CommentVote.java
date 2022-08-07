@@ -10,7 +10,8 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
-@Table
+@Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueInvestorAndComment",
+        columnNames = { "investor_id", "comment_id" }) })
 @Getter
 @Setter
 @NoArgsConstructor

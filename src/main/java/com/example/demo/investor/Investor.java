@@ -29,11 +29,11 @@ public class Investor {
     )
     private Long id;
 
-    @Column
+    @Column(unique = true)
     @NonNull
     private String name;
 
-    @Column
+    @Column(unique = true)
     @NonNull
     private String email;
 
