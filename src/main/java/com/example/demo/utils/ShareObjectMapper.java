@@ -31,12 +31,13 @@ public class ShareObjectMapper {
     }
 
     public static ShareItem shareItemObjectMapper(String response) {
+        Date date = Date.valueOf(LocalDate.now());
         JSONObject dailyDataJsonObj = new JSONObject(response).getJSONObject("Global Quote");
         ShareItem shareItem = new ShareItem();
         shareItem.setName(dailyDataJsonObj.getString("01. symbol"));
         shareItem.setSymbol(dailyDataJsonObj.getString("01. symbol"));
         shareItem.setPrice(dailyDataJsonObj.getDouble("05. price"));
-        shareItem.setUpdatedAt(LocalDateTime.now());
+        shareItem.setUpdatedAt(date);
 
         return shareItem;
     }

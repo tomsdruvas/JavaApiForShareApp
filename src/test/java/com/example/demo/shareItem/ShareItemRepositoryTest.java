@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
+import java.sql.Date;
 import java.time.LocalDateTime;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -18,7 +19,7 @@ class ShareItemRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, LocalDateTime.now());
+        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, Date.valueOf("2022-08-02"));
         underTest.save(shareItem);
     }
 

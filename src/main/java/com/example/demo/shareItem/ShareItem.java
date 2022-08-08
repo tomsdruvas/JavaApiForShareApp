@@ -1,15 +1,14 @@
 package com.example.demo.shareItem;
 
 import com.example.demo.shareDataDaily.ShareDataDaily;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.List;
 
 
@@ -19,6 +18,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class ShareItem {
     @Id
 
@@ -42,28 +43,15 @@ public class ShareItem {
     @NonNull
     private Double price;
     @Column(nullable = false)
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @NonNull
-    private LocalDateTime updatedAt;
+    private Date updatedAt;
 
     @OneToMany(mappedBy = "shareItem", fetch = FetchType.LAZY)
     @OrderBy("date")
     private List<ShareDataDaily> shareDataDailies;
 
 
-    public ShareItem(Long id, String name, String symbol, Double price, LocalDateTime updatedAt) {
-        this.id = id;
-        this.name = name;
-        this.symbol = symbol;
-        this.price = price;
-        this.updatedAt = updatedAt;
-    }
-
-    public ShareItem(String name, String symbol, Double price, LocalDateTime updatedAt) {
-        this.name = name;
-        this.symbol = symbol;
-        this.price = price;
-        this.updatedAt = updatedAt;
-    }
 
     @Override
     public String toString() {

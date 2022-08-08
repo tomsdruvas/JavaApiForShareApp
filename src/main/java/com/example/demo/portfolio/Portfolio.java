@@ -3,10 +3,8 @@ package com.example.demo.portfolio;
 import com.example.demo.investment.Investment;
 import com.example.demo.investor.Investor;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
+
 import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
@@ -16,6 +14,8 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class Portfolio {
 
     @Id
@@ -52,7 +52,6 @@ public class Portfolio {
     @Column
     @NonNull
     private Boolean isPublic;
-
 
 
 }
