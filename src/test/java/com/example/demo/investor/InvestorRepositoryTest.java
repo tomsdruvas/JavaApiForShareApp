@@ -9,6 +9,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
 import java.util.List;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
@@ -24,6 +25,15 @@ class InvestorRepositoryTest {
         List<Investor> listOfInvestors = underTest.findAll();
 
         assertEquals(listOfInvestors.size(),1);
+    }
+
+    @Test
+    void shouldBeAbleToFindByName(){
+        Investor investor = new Investor("Jack", "Jack@mail.com");
+        underTest.save(investor);
+
+        Investor investorEntity = underTest.findByName("Jack");
+        assertThat(investorEntity.getEmail()).isEqualTo("Jack@mail.com");
     }
 
 
