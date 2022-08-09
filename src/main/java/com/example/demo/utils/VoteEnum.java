@@ -1,15 +1,11 @@
 package com.example.demo.utils;
 
 public enum VoteEnum {
-    UP("Up"),
-    DOWN("Down");
-    private final String voteDirection;
+    UP,
+    DOWN;
 
-    VoteEnum(String voteDirection) {
-        this.voteDirection = voteDirection;
+
+    VoteEnum() {
     }
 
-    public String getVoteDirection() {
-        return voteDirection;
-    }
 }

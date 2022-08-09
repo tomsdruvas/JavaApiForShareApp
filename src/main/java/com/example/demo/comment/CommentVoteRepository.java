@@ -1,10 +1,8 @@
-package com.example.demo.portfolio;
+package com.example.demo.comment;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface PortfolioRepository extends JpaRepository<Portfolio, Long> {
-
-
+public interface CommentVoteRepository extends JpaRepository<CommentVote, Long> {
 }

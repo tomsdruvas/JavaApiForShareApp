@@ -3,10 +3,7 @@ package com.example.demo.comment;
 import com.example.demo.investor.Investor;
 import com.example.demo.portfolio.Portfolio;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.Setter;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
@@ -16,6 +13,8 @@ import java.util.Date;
 @Getter
 @Setter
 @NoArgsConstructor
+@RequiredArgsConstructor
+@AllArgsConstructor
 public class Comment {
     @Id
 
