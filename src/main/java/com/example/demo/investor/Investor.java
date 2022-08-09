@@ -2,6 +2,7 @@ package com.example.demo.investor;
 
 import com.example.demo.comment.Comment;
 import com.example.demo.portfolio.Portfolio;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
 import javax.persistence.*;
@@ -38,10 +39,12 @@ public class Investor {
 
     @OneToMany
     @JoinColumn(name = "investor_id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Set<Portfolio> portfolios;
 
     @OneToMany
     @JoinColumn(name = "investor_id")
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Set<Comment> comments;
 
 

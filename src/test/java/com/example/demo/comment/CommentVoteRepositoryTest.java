@@ -5,9 +5,6 @@ import com.example.demo.investor.InvestorRepository;
 import com.example.demo.portfolio.Portfolio;
 import com.example.demo.portfolio.PortfolioRepository;
 import com.example.demo.utils.VoteEnum;
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -33,10 +30,6 @@ class CommentVoteRepositoryTest {
 
     @Autowired
     private InvestorRepository investorRepository;
-
-
-
-
 
 
 
@@ -90,7 +83,7 @@ class CommentVoteRepositoryTest {
         Long id = portfolioRepository.findAll().get(0).getId();
         List<Comment> commentList = commentRepository.findByPortfolioId(String.valueOf(id));
 
-        assertEquals(commentList.size() > 1,true);
+        assertTrue(commentList.size() > 0);
 
     }
 
