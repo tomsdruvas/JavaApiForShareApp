@@ -25,7 +25,7 @@ public class InvestorController {
         return new ResponseEntity<>(investorService.getAll(), HttpStatus.OK);
     }
 
-    @PostMapping("/post")
+    @PostMapping("/")
     public Investor newInvestor(@Valid @RequestBody Investor newInvestor) {
         return investorService.save(newInvestor);
     }
