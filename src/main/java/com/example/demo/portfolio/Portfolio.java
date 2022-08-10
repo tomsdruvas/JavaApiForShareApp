@@ -3,6 +3,7 @@ package com.example.demo.portfolio;
 import com.example.demo.investment.Investment;
 import com.example.demo.investor.Investor;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -44,7 +45,12 @@ public class Portfolio {
     @JoinColumn(name = "portfolio_id")
     private Set<Investment> investments;
 
+    @Column(name = "investor_id")
+    private Long investorId;
+
+    @JsonIgnore
     @ManyToOne
+    @JoinColumn(name = "investor_id", insertable = false, updatable = false)
     @NonNull
     private Investor investor;
 

@@ -30,7 +30,7 @@ public class InvestorController {
     }
 
     @GetMapping("/{id}")
-    public Investor getInvestorById(@PathVariable(value = "id") Long investorId, HttpServletResponse response){
+    public Investor getInvestorById(@PathVariable(value = "id") Long investorId){
         try {
             return investorService.getById(investorId);
         }
