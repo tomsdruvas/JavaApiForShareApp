@@ -3,6 +3,7 @@ package com.example.demo.investor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,8 +23,8 @@ public class InvestorService {
         return investorRepository.findAll();
     }
 
-    public Optional<Investor> getById(long id) {
-        return investorRepository.findById(id);
+    public Investor getById(long id) {
+        return investorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(String.valueOf(id)));
     }
 
     public Investor save(Investor newInvestor) {
