@@ -7,13 +7,14 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping(path = "api/investors")
 public class InvestorController {
 
 
-    private InvestorService investorService;
+    private final InvestorService investorService;
 
     @Autowired
     public InvestorController(InvestorService investorService) {
@@ -25,7 +26,12 @@ public class InvestorController {
         return new ResponseEntity<>(investorService.getAll(), HttpStatus.OK);
     }
 
-    @PostMapping("/")
+    @GetMapping("/{id}")
+    public Optional<Investor> getInvestorById(@PathVariable(value = "id") Long investorId){
+        return investorService.getById(investorId);
+    }
+
+    @PostMapping()
     public Investor newInvestor(@Valid @RequestBody Investor newInvestor) {
         return investorService.save(newInvestor);
     }
