@@ -31,9 +31,13 @@ public class InvestorService {
         return investorRepository.save(newInvestor);
     }
 
-    public void delete(long id) {
-        investorRepository.deleteById(id);
+    public void removeInvestorByID(Long InvestorId) throws EntityNotFoundException {
+    boolean exists = investorRepository.existsById(InvestorId);
+    if (!exists) {
+        throw new EntityNotFoundException("Investor with" + InvestorId + "doesn't exist");
     }
+    investorRepository.deleteById(InvestorId);
+}
 
 
 }

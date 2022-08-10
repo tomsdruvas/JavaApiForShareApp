@@ -47,5 +47,9 @@ public class Investor {
     @JsonInclude(JsonInclude.Include.NON_NULL)
     private Set<Comment> comments;
 
-
+    public Investor(Long id, @NonNull String name, @NonNull String email) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+    }
 }
