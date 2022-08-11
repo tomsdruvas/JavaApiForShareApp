@@ -46,13 +46,14 @@ class InvestorServiceTest {
     void getById() {
         Long investorId = 1L;
         Investor investorForMock = new Investor(investorId, "John","John@mail.com");
-        doReturn(Optional.of(investorForMock)).when(investorRepository).findById(investorId);
+        doReturn(investorForMock).when(investorRepository).findInvestorById(investorId);
+        doReturn(true).when(investorRepository).existsById(investorId);
 
         Investor investorEntityFromService = underTest.getById(investorId);
 
         assertThat(investorId).isEqualTo(investorEntityFromService.getId());
         assertThat(investorForMock.getName()).isEqualTo(investorEntityFromService.getName());
-        verify(investorRepository).findById(investorId);
+        verify(investorRepository).findInvestorById(investorId);
     }
 
     @Test
@@ -101,7 +102,7 @@ class InvestorServiceTest {
 
 
         when(investorRepository.existsById(1L)).thenReturn(true);
-        doReturn(Optional.of(investorForMock)).when(investorRepository).findById(investorId);
+        doReturn(investorForMock).when(investorRepository).findInvestorById(investorId);
         when(investorRepository.save(investorForMock)).thenReturn(updatedInvestor);
 
 
@@ -109,7 +110,7 @@ class InvestorServiceTest {
         assertThat(actual).isEqualTo(updatedInvestor);
 
         verify(investorRepository).existsById(1L);
-        verify(investorRepository).findById(1L);
+        verify(investorRepository).findInvestorById(1L);
         verify(investorRepository).save(investorForMock);
 
 

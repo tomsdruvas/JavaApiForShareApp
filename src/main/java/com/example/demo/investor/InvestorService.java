@@ -24,7 +24,13 @@ public class InvestorService {
     }
 
     public Investor getById(long investorId) throws EntityNotFoundException {
-        return investorRepository.findById(investorId).orElseThrow(() -> new EntityNotFoundException("Investor with" + investorId + "doesn't exist"));
+
+        boolean exists = investorRepository.existsById(investorId);
+        if (!exists) {
+            throw new EntityNotFoundException("Portfolio with" + investorId + "doesn't exist");
+        }
+
+        return investorRepository.findInvestorById(investorId);
     }
 
     public Investor save(Investor newInvestor) {
@@ -45,7 +51,7 @@ public class InvestorService {
         if (!exists) {
             throw new EntityNotFoundException("Investor with" + id + "doesn't exist");
         }
-        Investor investor = investorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Investor with" + id + "doesn't exist"));
+        Investor investor = investorRepository.findInvestorById(id);
 
         investor.setName(updatedInvestorDetails.getName());
         investor.setEmail(updatedInvestorDetails.getEmail());

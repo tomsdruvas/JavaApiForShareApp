@@ -9,5 +9,6 @@ import java.util.Optional;
 @Repository
 public interface InvestorRepository extends JpaRepository<Investor, Long> {
     Investor findByName(String name);
+    Investor findInvestorById(Long id);
 
 }

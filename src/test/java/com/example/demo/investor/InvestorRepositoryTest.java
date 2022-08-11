@@ -51,7 +51,7 @@ class InvestorRepositoryTest {
 
         assertThat(updatedInvestor.getName()).isEqualTo("John");
         assertThat(updatedInvestor.getEmail()).isEqualTo("John@mail.com");
-        
+
     }
 
 

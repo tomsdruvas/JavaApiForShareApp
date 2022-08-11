@@ -60,4 +60,11 @@ public class Portfolio {
     private Boolean isPublic;
 
 
+    public Portfolio(Long id, @NonNull String name, @NonNull Date createdDate, @NonNull Investor investor, @NonNull Boolean isPublic) {
+        this.id = id;
+        this.name = name;
+        this.createdDate = createdDate;
+        this.investor = investor;
+        this.isPublic = isPublic;
+    }
 }

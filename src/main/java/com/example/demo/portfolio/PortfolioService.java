@@ -1,5 +1,6 @@
 package com.example.demo.portfolio;
 
+import com.example.demo.investor.Investor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +29,7 @@ public class PortfolioService {
             throw new EntityNotFoundException("Portfolio with" + portfolioId + "doesn't exist");
         }
 
-        return portfolioRepository.findById(portfolioId).orElseThrow(() -> new EntityNotFoundException(String.valueOf(portfolioId)));
+        return portfolioRepository.findPortfolioById(portfolioId);
     }
 
     public Portfolio save(Portfolio newPortfolio) {
@@ -41,6 +42,21 @@ public class PortfolioService {
             throw new EntityNotFoundException("Portfolio with" + portfolioId + "doesn't exist");
         }
         portfolioRepository.deleteById(portfolioId);
+    }
+
+    public Portfolio updateById(long id, Portfolio updatedPortfolioDetails) {
+        boolean exists = portfolioRepository.existsById(id);
+        if (!exists) {
+            throw new EntityNotFoundException("Portfolio with" + id + "doesn't exist");
+        }
+        Portfolio portfolio = portfolioRepository.findPortfolioById(id);
+
+        portfolio.setName(updatedPortfolioDetails.getName());
+        portfolio.setInvestor(updatedPortfolioDetails.getInvestor());
+        portfolio.setCreatedDate(updatedPortfolioDetails.getCreatedDate());
+        portfolio.setIsPublic(updatedPortfolioDetails.getIsPublic());
+
+        return portfolioRepository.save(portfolio);
     }
 
 
