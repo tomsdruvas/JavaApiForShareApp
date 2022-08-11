@@ -37,17 +37,27 @@ public class PortfolioController {
         }
     }
 
+
+    @PutMapping("/{id}")
+    @ResponseStatus(code = HttpStatus.OK)
+    public ResponseEntity<Portfolio> updatePortfolio(@PathVariable long id, @RequestBody Portfolio updatedPortfolioDetails){
+        Portfolio updatePortfolio = portfolioService.updateById(id, updatedPortfolioDetails);
+
+        return ResponseEntity.ok(updatePortfolio);
+
+    }
+
     @PostMapping()
     @ResponseStatus(code = HttpStatus.CREATED)
-    public Portfolio newInvestor(@Valid @RequestBody Portfolio portfolioRequest){
+    public Portfolio newPortfolio(@Valid @RequestBody Portfolio portfolioRequest){
 
         return portfolioService.save(portfolioRequest);
     }
 
-    @DeleteMapping("/{portfolioId}")
-    public void  deleteInvestor(@PathVariable(value = "portfolioId") Long portfolioId){
+    @DeleteMapping("/{id}")
+    public void  deleteInvestor(@PathVariable(value = "id") Long id){
         try {
-            portfolioService.removePortfolioByID(portfolioId);
+            portfolioService.removePortfolioByID(id);
         }
         catch (EntityNotFoundException exc){
             throw new ResponseStatusException(

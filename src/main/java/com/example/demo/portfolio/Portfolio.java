@@ -67,4 +67,13 @@ public class Portfolio {
         this.investor = investor;
         this.isPublic = isPublic;
     }
+
+    public Portfolio(@NonNull String name, @NonNull Date createdDate, @NonNull Long investorId, @NonNull Boolean isPublic) {
+        this.id = id;
+        this.name = name;
+        this.createdDate = createdDate;
+        this.investorId = investorId;
+        this.isPublic = isPublic;
+    }
+
 }

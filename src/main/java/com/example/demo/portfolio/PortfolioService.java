@@ -52,7 +52,7 @@ public class PortfolioService {
         Portfolio portfolio = portfolioRepository.findPortfolioById(id);
 
         portfolio.setName(updatedPortfolioDetails.getName());
-        portfolio.setInvestor(updatedPortfolioDetails.getInvestor());
+        portfolio.setInvestorId(updatedPortfolioDetails.getInvestorId());
         portfolio.setCreatedDate(updatedPortfolioDetails.getCreatedDate());
         portfolio.setIsPublic(updatedPortfolioDetails.getIsPublic());
 

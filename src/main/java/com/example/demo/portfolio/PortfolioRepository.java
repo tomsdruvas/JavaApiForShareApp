@@ -7,4 +7,5 @@ import org.springframework.stereotype.Repository;
 public interface PortfolioRepository extends JpaRepository<Portfolio, Long> {
 
     Portfolio findPortfolioById(Long id);
+    Portfolio findPortfolioByName(String name);
 }
