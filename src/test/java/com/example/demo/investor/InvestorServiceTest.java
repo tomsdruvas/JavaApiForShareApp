@@ -94,7 +94,7 @@ class InvestorServiceTest {
     }
 
     @Test
-    void updateInvestorById_success() throws Exception {
+    void updateInvestorById() {
         Long investorId = 1L;
         Investor investorForMock = new Investor(investorId, "John","John@mail.com");
         Investor updateInvestor = new Investor("Updated","Jack@mail.com");

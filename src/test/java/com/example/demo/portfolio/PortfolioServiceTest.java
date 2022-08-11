@@ -13,8 +13,7 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
 class PortfolioServiceTest {
@@ -59,14 +58,50 @@ class PortfolioServiceTest {
     }
 
     @Test
-    void save() {
+    void shouldBeAbleToSaveViaService() {
+
+        Portfolio expected = new Portfolio("Tech stocks updated", Date.valueOf("2022-08-03"), investor, false);
+
+        when(portfolioRepository.save(expected))
+                    .thenReturn(expected);
+        Portfolio actual = underTest.save(expected);
+        verify(portfolioRepository).save(expected);
+        assertThat(expected).isEqualTo(actual);
+
     }
 
     @Test
-    void removePortfolioByID() {
+    void shouldDeleteWhenValidPortfolioId() {
+        when(portfolioRepository.existsById(1L)).thenReturn(true);
+
+        doNothing().when(portfolioRepository).deleteById(1L);
+
+        underTest.removePortfolioByID(1L);
+
+        verify(portfolioRepository).existsById(1L);
+        verify(portfolioRepository).deleteById(1L);
+
     }
 
     @Test
-    void updateById() {
+    void updateInvestorById() {
+        Long portfolioId = 1L;
+        Portfolio portfolioForMock = new Portfolio(portfolioId,"Tech stocks updated", Date.valueOf("2022-08-03"), investor, false);
+
+        Portfolio updatePortfolio = new Portfolio("Tech stocks updated", Date.valueOf("2022-08-03"), investor, false);
+        Portfolio updatedPortfolio = new Portfolio(portfolioId,"Tech stocks updated", Date.valueOf("2022-08-03"), investor, false);
+
+
+        when(portfolioRepository.existsById(1L)).thenReturn(true);
+        doReturn(portfolioForMock).when(portfolioRepository).findPortfolioById(portfolioId);
+        when(portfolioRepository.save(portfolioForMock)).thenReturn(updatedPortfolio);
+
+
+        Portfolio actual = underTest.updateById(portfolioId, updatePortfolio);
+        assertThat(actual).isEqualTo(updatedPortfolio);
+
+        verify(portfolioRepository).existsById(1L);
+        verify(portfolioRepository).findPortfolioById(1L);
+        verify(portfolioRepository).save(portfolioForMock);
     }
 }
