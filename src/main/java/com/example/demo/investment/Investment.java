@@ -33,9 +33,13 @@ public class Investment {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "share_item_id", insertable = false, updatable = false)
     @JsonIgnore
     @NonNull
     private ShareItem shareItem;
+
+    @Column(name = "share_item_id")
+    private Long shareItemId;
 
     @Column
     @NonNull
@@ -52,6 +56,27 @@ public class Investment {
 
     @ManyToOne
     @NonNull
+    @JoinColumn(name = "portfolio_id", insertable = false, updatable = false)
     private Portfolio portfolio;
 
+    @Column(name = "portfolio_id")
+    private Long portfolioId;
+
+
+    public Investment(Long shareItemId, @NonNull Double quantity, @NonNull Double entryPrice, @NonNull Date entryDate, Long portfolioId) {
+        this.shareItemId = shareItemId;
+        this.quantity = quantity;
+        this.entryPrice = entryPrice;
+        this.entryDate = entryDate;
+        this.portfolioId = portfolioId;
+    }
+
+    public Investment(Long id, Long shareItemId, @NonNull Double quantity, @NonNull Double entryPrice, @NonNull Date entryDate, Long portfolioId) {
+        this.id = id;
+        this.shareItemId = shareItemId;
+        this.quantity = quantity;
+        this.entryPrice = entryPrice;
+        this.entryDate = entryDate;
+        this.portfolioId = portfolioId;
+    }
 }

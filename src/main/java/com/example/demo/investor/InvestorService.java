@@ -27,7 +27,7 @@ public class InvestorService {
 
         boolean exists = investorRepository.existsById(investorId);
         if (!exists) {
-            throw new EntityNotFoundException("Portfolio with" + investorId + "doesn't exist");
+            throw new EntityNotFoundException("Investor with " + investorId + " doesn't exist");
         }
 
         return investorRepository.findInvestorById(investorId);
@@ -40,16 +40,16 @@ public class InvestorService {
     public void removeInvestorByID(Long investorId) throws EntityNotFoundException {
     boolean exists = investorRepository.existsById(investorId);
     if (!exists) {
-        throw new EntityNotFoundException("Investor with" + investorId + "doesn't exist");
+        throw new EntityNotFoundException("Investor with " + investorId + " doesn't exist");
     }
     investorRepository.deleteById(investorId);
-}
+    }
 
 
     public Investor updateById(long id, Investor updatedInvestorDetails) {
         boolean exists = investorRepository.existsById(id);
         if (!exists) {
-            throw new EntityNotFoundException("Investor with" + id + "doesn't exist");
+            throw new EntityNotFoundException("Investor with " + id + " doesn't exist");
         }
         Investor investor = investorRepository.findInvestorById(id);
 

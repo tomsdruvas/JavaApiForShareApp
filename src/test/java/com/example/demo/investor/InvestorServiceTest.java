@@ -89,7 +89,7 @@ class InvestorServiceTest {
                 "Expected underTest.removeInvestorByID to throw, but it didn't");
 
         assertNotNull(thrown);
-        assertTrue(thrown.getMessage().contains("Investor with" + 1L + "doesn't exist"));
+        assertTrue(thrown.getMessage().contains("Investor with " + 1L + " doesn't exist"));
 
     }
 
