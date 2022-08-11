@@ -2,6 +2,7 @@ package com.example.demo.shareItem;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -25,7 +26,8 @@ public class ShareItemController {
     }
 
     @GetMapping(path = "/{symbol}")
-    public ShareItem getShareItemBySymbolNew(@PathVariable("symbol") String symbol) throws IOException, InterruptedException {
+    @ResponseStatus(code = HttpStatus.OK)
+    public ShareItem getShareItemBySymbol(@PathVariable("symbol") String symbol) {
 
         return shareItemService.getShareItem(symbol);
     }

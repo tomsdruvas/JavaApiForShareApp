@@ -43,7 +43,7 @@ class InvestorServiceTest {
     }
 
     @Test
-    void getById() {
+    void canGetInvestorByIdFromService() {
         Long investorId = 1L;
         Investor investorForMock = new Investor(investorId, "John","John@mail.com");
         doReturn(investorForMock).when(investorRepository).findInvestorById(investorId);
