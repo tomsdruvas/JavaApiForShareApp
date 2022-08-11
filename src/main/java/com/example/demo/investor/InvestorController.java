@@ -44,4 +44,24 @@ public class InvestorController {
     public Investor newInvestor(@Valid @RequestBody Investor newInvestor) {
         return investorService.save(newInvestor);
     }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Investor> updateInvestor(@PathVariable long id, @RequestBody Investor updatedInvestorDetails){
+        Investor updateInvestor = investorService.updateById(id, updatedInvestorDetails);
+
+        return ResponseEntity.ok(updateInvestor);
+
+    }
+
+    @DeleteMapping("/{investorId}")
+    public void  deleteInvestor(@PathVariable(value = "investorId") Long investorId){
+        try {
+            investorService.removeInvestorByID(investorId);
+        }
+        catch (EntityNotFoundException exc){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Investor Not Found", exc);
+        }
+    }
 }

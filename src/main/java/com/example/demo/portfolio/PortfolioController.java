@@ -43,4 +43,15 @@ public class PortfolioController {
 
         return portfolioService.save(portfolioRequest);
     }
+
+    @DeleteMapping("/{portfolioId}")
+    public void  deleteInvestor(@PathVariable(value = "portfolioId") Long portfolioId){
+        try {
+            portfolioService.removePortfolioByID(portfolioId);
+        }
+        catch (EntityNotFoundException exc){
+            throw new ResponseStatusException(
+                    HttpStatus.NOT_FOUND, "Portfolio Not Found", exc);
+        }
+    }
 }

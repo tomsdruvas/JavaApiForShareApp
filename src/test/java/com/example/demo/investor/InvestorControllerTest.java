@@ -9,7 +9,10 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
+
+import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -83,5 +86,23 @@ class InvestorControllerTest {
         mockMvc.perform(get("/api/investors/12345")
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNotFound());
+    }
+
+    @Test
+    void shouldBeAbleToDeleteInvestorById() throws Exception {
+        Investor investor = new Investor("John","John@mail.com");
+        Investor investor1 = new Investor("Jack","Jack@mail.com");
+
+        String investorEntityId = investorRepository.save(investor).getId().toString();
+        investorRepository.save(investor1);
+
+        mockMvc.perform(MockMvcRequestBuilders.delete("/api/investors/" + investorEntityId)
+                        .contentType("application/json"))
+                .andExpect(status().isOk());
+
+        List<Investor> investorList = investorRepository.findAll();
+        assertThat(investorList.size()).isEqualTo(1);
+        assertThat(investorList.get(0).getName()).isEqualTo("Jack");
+
     }
 }

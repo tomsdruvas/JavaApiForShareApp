@@ -23,21 +23,33 @@ public class InvestorService {
         return investorRepository.findAll();
     }
 
-    public Investor getById(long id) {
-        return investorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException(String.valueOf(id)));
+    public Investor getById(long investorId) throws EntityNotFoundException {
+        return investorRepository.findById(investorId).orElseThrow(() -> new EntityNotFoundException("Investor with" + investorId + "doesn't exist"));
     }
 
     public Investor save(Investor newInvestor) {
         return investorRepository.save(newInvestor);
     }
 
-    public void removeInvestorByID(Long InvestorId) throws EntityNotFoundException {
-    boolean exists = investorRepository.existsById(InvestorId);
+    public void removeInvestorByID(Long investorId) throws EntityNotFoundException {
+    boolean exists = investorRepository.existsById(investorId);
     if (!exists) {
-        throw new EntityNotFoundException("Investor with" + InvestorId + "doesn't exist");
+        throw new EntityNotFoundException("Investor with" + investorId + "doesn't exist");
     }
-    investorRepository.deleteById(InvestorId);
+    investorRepository.deleteById(investorId);
 }
 
 
+    public Investor updateById(long id, Investor updatedInvestorDetails) {
+        boolean exists = investorRepository.existsById(id);
+        if (!exists) {
+            throw new EntityNotFoundException("Investor with" + id + "doesn't exist");
+        }
+        Investor investor = investorRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Investor with" + id + "doesn't exist"));
+
+        investor.setName(updatedInvestorDetails.getName());
+        investor.setEmail(updatedInvestorDetails.getEmail());
+
+        return investorRepository.save(investor);
+    }
 }

@@ -63,9 +63,6 @@ class InvestorServiceTest {
         Investor actual = underTest.save(expected);
         verify(investorRepository).save(expected);
         assertThat(expected).isEqualTo(actual);
-
-
-
     }
 
     @Test
