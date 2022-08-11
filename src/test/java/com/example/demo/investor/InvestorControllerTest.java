@@ -17,8 +17,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 import static org.hamcrest.Matchers.hasSize;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
@@ -105,4 +104,25 @@ class InvestorControllerTest {
         assertThat(investorList.get(0).getName()).isEqualTo("Jack");
 
     }
+
+    @Test
+    void updateInvestorById_success() throws Exception {
+        Investor investor = new Investor("John","John@mail.com");
+        Investor updateInvestor = new Investor("Updated","Jack@mail.com");
+
+        String investorEntityId = investorRepository.save(investor).getId().toString();
+
+        String updateInvestorJson = objectMapper.writeValueAsString(updateInvestor);
+
+        mockMvc.perform(put(("/api/investors/" + investorEntityId))
+                .content(updateInvestorJson)
+                .contentType("application/json"))
+                .andExpect(status().isOk());
+
+        List<Investor> investorList = investorRepository.findAll();
+        assertThat(investorList.size()).isEqualTo(1);
+        assertThat(investorList.get(0).getName()).isEqualTo("Updated");
+
+    }
+
 }

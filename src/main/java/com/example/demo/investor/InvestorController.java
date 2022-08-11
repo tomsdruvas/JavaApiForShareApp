@@ -47,6 +47,7 @@ public class InvestorController {
 
 
     @PutMapping("/{id}")
+    @ResponseStatus(code = HttpStatus.OK)
     public ResponseEntity<Investor> updateInvestor(@PathVariable long id, @RequestBody Investor updatedInvestorDetails){
         Investor updateInvestor = investorService.updateById(id, updatedInvestorDetails);
 

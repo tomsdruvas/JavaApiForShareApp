@@ -90,7 +90,32 @@ class InvestorServiceTest {
         assertNotNull(thrown);
         assertTrue(thrown.getMessage().contains("Investor with" + 1L + "doesn't exist"));
 
+    }
+
+    @Test
+    void updateInvestorById_success() throws Exception {
+        Long investorId = 1L;
+        Investor investorForMock = new Investor(investorId, "John","John@mail.com");
+        Investor updateInvestor = new Investor("Updated","Jack@mail.com");
+        Investor updatedInvestor = new Investor(investorId,"Updated","Jack@mail.com");
+
+
+        when(investorRepository.existsById(1L)).thenReturn(true);
+        doReturn(Optional.of(investorForMock)).when(investorRepository).findById(investorId);
+        when(investorRepository.save(investorForMock)).thenReturn(updatedInvestor);
+
+
+        Investor actual = underTest.updateById(investorId, updateInvestor);
+        assertThat(actual).isEqualTo(updatedInvestor);
+
+        verify(investorRepository).existsById(1L);
+        verify(investorRepository).findById(1L);
+        verify(investorRepository).save(investorForMock);
+
+
+
 
 
     }
+
 }

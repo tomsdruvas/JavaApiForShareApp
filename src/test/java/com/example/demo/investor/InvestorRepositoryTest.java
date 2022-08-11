@@ -3,6 +3,7 @@ package com.example.demo.investor;
 
 
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -34,6 +35,23 @@ class InvestorRepositoryTest {
 
         Investor investorEntity = underTest.findByName("Jack");
         assertThat(investorEntity.getEmail()).isEqualTo("Jack@mail.com");
+    }
+
+    @Test
+    void shouldBeAbleToUpdateInvestorById(){
+        Investor investor = new Investor("Jack", "Jack@mail.com");
+        Investor savedInvestor = underTest.save(investor);
+
+        Investor updatedDetails = new Investor("John", "John@mail.com");
+
+        savedInvestor.setName(updatedDetails.getName());
+        savedInvestor.setEmail(updatedDetails.getEmail());
+
+        Investor updatedInvestor = underTest.save(investor);
+
+        assertThat(updatedInvestor.getName()).isEqualTo("John");
+        assertThat(updatedInvestor.getEmail()).isEqualTo("John@mail.com");
+        
     }
 
 
