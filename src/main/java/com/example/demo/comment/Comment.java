@@ -49,7 +49,7 @@ public class Comment {
     private Portfolio portfolio;
 
     @Column
-//    @JsonFormat(pattern = "dd/MM/yyyy")
+    @JsonFormat(pattern = "dd/MM/yyyy")
     @NonNull
     private Date date;
 

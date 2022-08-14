@@ -15,13 +15,7 @@ public class DemoApplication {
 		SpringApplication.run(DemoApplication.class, args);
 	}
 
-//	@Bean
-//	public Jackson2ObjectMapperBuilderCustomizer jsonCustomizer(){
-//		return builder -> {
-//			builder.simpleDateFormat("dd/MM/yyyy");
-//			builder.serializers(new LocalDateSerializer(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
-//		};
-//	}
+
 
 
 
