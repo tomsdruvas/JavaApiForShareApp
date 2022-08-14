@@ -36,7 +36,7 @@ public class ShareDataDaily {
     @NonNull
     private String symbol;
     @Column(nullable = false)
-    @JsonFormat(pattern = "dd/MM/yyyy")
+//    @JsonFormat(pattern = "dd/MM/yyyy")
     @NonNull
     private Date date;
     @Column

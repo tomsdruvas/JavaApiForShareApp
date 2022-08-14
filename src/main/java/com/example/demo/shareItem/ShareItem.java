@@ -43,7 +43,7 @@ public class ShareItem {
     @NonNull
     private Double price;
     @Column(nullable = false)
-    @JsonFormat(pattern = "dd/MM/yyyy")
+//    @JsonFormat(pattern = "dd/MM/yyyy")
     @NonNull
     private Date updatedAt;
 

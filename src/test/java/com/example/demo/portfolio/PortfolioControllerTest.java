@@ -61,7 +61,6 @@ class PortfolioControllerTest {
         portfolio2 = new Portfolio("Food and Beverage", Date.valueOf("2022-08-10"), id2, false);
         portfolioRepository.save(portfolio);
         portfolioRepository.save(portfolio2);
-
     }
 
     @AfterEach
@@ -140,7 +139,6 @@ class PortfolioControllerTest {
         Portfolio updatedPortfolio = portfolioRepository.findPortfolioById(portfolio.getId());
         assertThat(updatedPortfolio.getName()).isEqualTo("Tech stocks updated");
         assertThat(updatedPortfolio.getIsPublic()).isEqualTo(true);
-
 
     }
 }

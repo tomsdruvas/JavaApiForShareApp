@@ -55,6 +55,7 @@ public class Investment {
     private Date entryDate;
 
     @ManyToOne
+    @JsonIgnore
     @NonNull
     @JoinColumn(name = "portfolio_id", insertable = false, updatable = false)
     private Portfolio portfolio;

@@ -37,7 +37,6 @@ public class Portfolio {
     private String name;
 
     @Column
-    @JsonFormat(pattern = "dd/MM/yyyy")
     @NonNull
     private Date createdDate;
 
