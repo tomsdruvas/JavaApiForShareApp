@@ -118,7 +118,7 @@ class InvestmentControllerTest {
 
     @Test
     void canGetInvestmentById_success() throws Exception {
-        String investmentEntityId = investmentRepository.findAll().get(0).getId().toString();
+        Long investmentEntityId = investmentRepository.findAll().get(0).getId();
 
         mockMvc.perform(get("/api/investment/" + investmentEntityId)
                         .contentType("application/json"))

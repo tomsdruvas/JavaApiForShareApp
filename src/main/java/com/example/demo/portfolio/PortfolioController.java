@@ -55,7 +55,7 @@ public class PortfolioController {
     }
 
     @DeleteMapping("/{id}")
-    public void  deleteInvestor(@PathVariable(value = "id") Long id){
+    public void  deletePortfolio(@PathVariable(value = "id") Long id){
         try {
             portfolioService.removePortfolioByID(id);
         }

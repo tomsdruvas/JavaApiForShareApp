@@ -1,5 +1,7 @@
 package com.example.demo.comment;
 
+import com.example.demo.commentVote.CommentVote;
+import com.example.demo.commentVote.CommentVoteRepository;
 import com.example.demo.investor.Investor;
 import com.example.demo.investor.InvestorRepository;
 import com.example.demo.portfolio.Portfolio;
@@ -81,7 +83,7 @@ class CommentVoteRepositoryTest {
     @Sql("/test-db-setup.sql")
     void findCommentsByPortfolioId(){
         Long id = portfolioRepository.findAll().get(0).getId();
-        List<Comment> commentList = commentRepository.findByPortfolioId(String.valueOf(id));
+        List<Comment> commentList = commentRepository.findCommentsByPortfolioId(id);
 
         assertTrue(commentList.size() > 0);
 

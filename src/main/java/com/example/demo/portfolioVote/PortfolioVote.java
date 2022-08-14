@@ -1,8 +1,9 @@
-package com.example.demo.portfolio;
+package com.example.demo.portfolioVote;
 
 
 import com.example.demo.comment.Comment;
 import com.example.demo.investor.Investor;
+import com.example.demo.portfolio.Portfolio;
 import com.example.demo.utils.VoteEnum;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

@@ -1,5 +1,6 @@
-package com.example.demo.comment;
+package com.example.demo.commentVote;
 
+import com.example.demo.comment.Comment;
 import com.example.demo.investor.Investor;
 import com.example.demo.utils.VoteEnum;
 import lombok.*;

@@ -1,4 +1,4 @@
-package com.example.demo.comment;
+package com.example.demo.commentVote;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
