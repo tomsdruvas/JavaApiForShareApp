@@ -1,8 +1,7 @@
 package com.example.demo.webClient;
 
 
-import com.example.demo.shareItem.ShareItem;
-import com.example.demo.utils.ShareObjectMapper;
+
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.tomakehurst.wiremock.WireMockServer;
@@ -10,6 +9,7 @@ import com.github.tomakehurst.wiremock.client.WireMock;
 import com.github.tomakehurst.wiremock.core.WireMockConfiguration;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,6 +28,7 @@ import java.io.InputStream;
 
 import static com.github.tomakehurst.wiremock.client.WireMock.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 
 @SpringBootTest()
@@ -56,25 +57,24 @@ public class WebClientTestWireMockTest {
     }
 
     @Test
-    public void test_getShareItemInfo() throws Exception {
+    public void test_getShareItemInfo(){
 
-        ObjectMapper mapper = new ObjectMapper();
-        JsonNode actual = mapper.readTree(getJson("mock-api-call-response-share-item.json"));
+        String actual = getJson("mock-api-call-response-share-item.json");
 
         wireMockServer.stubFor(get("/query?function=GLOBAL_QUOTE&symbol=AMZN&apikey=undefined").willReturn(
                         WireMock.aResponse()
                                 .withStatus(HttpStatus.OK.value())
                                 .withHeader(HttpHeaders.CONTENT_TYPE, MediaType.APPLICATION_JSON_VALUE)
-                                .withJsonBody(actual)
+                                .withBody(actual)
                 )
         );
 
         String response = webClientToGetAPI.getShareInfoFromApiBySymbol("AMZN");
 
-        JsonNode expected = mapper.readTree(response);
 
-        assertEquals(expected, actual);
-        assertEquals(expected.get("Global Quote").get("05. price").asText(), "121.1400");
+
+        assertEquals(response, actual);
+        assertTrue(response.contains("121.1400"));
 
         wireMockServer.verify(getRequestedFor(urlEqualTo("/query?function=GLOBAL_QUOTE&symbol=AMZN&apikey=undefined")));
     }
