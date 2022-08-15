@@ -2,6 +2,7 @@ package com.example.demo.investor;
 
 import com.example.demo.comment.Comment;
 import com.example.demo.portfolio.Portfolio;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.*;
 
@@ -44,7 +45,7 @@ public class Investor {
 
     @OneToMany
     @JoinColumn(name = "investor_id")
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonIgnore
     private Set<Comment> comments;
 
     public Investor(Long id, @NonNull String name, @NonNull String email) {

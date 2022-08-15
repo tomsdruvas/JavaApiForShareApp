@@ -1,5 +1,6 @@
 package com.example.demo.portfolio;
 
+import com.example.demo.comment.Comment;
 import com.example.demo.investment.Investment;
 import com.example.demo.investor.Investor;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -54,10 +55,13 @@ public class Portfolio {
     @NonNull
     private Investor investor;
 
-
     @Column
     @NonNull
     private Boolean isPublic;
+
+    @OneToMany
+    @JoinColumn(name = "portfolio_id")
+    private Set<Comment> comments;
 
 
     public Portfolio(Long id, @NonNull String name, @NonNull Date createdDate, @NonNull Investor investor, @NonNull Boolean isPublic) {
