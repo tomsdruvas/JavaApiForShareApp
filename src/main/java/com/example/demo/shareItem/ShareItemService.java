@@ -2,6 +2,8 @@ package com.example.demo.shareItem;
 
 import com.example.demo.shareDataDaily.ShareDataDaily;
 import com.example.demo.shareDataDaily.ShareDataDailyRepository;
+import com.example.demo.shareDataWeekly.ShareDataWeekly;
+import com.example.demo.shareDataWeekly.ShareDataWeeklyRepository;
 import com.example.demo.utils.ShareObjectMapper;
 import com.example.demo.webClient.WebClientToGetAPI;
 import com.example.demo.webClient.WebClientToGetShareItemProperties;
@@ -10,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 
-import java.io.IOException;
 import java.util.List;
 
 @Service
@@ -18,11 +19,14 @@ public class ShareItemService {
     private final ShareItemRepository shareItemRepository;
     private final ShareDataDailyRepository shareDataDailyRepository;
 
+    private final ShareDataWeeklyRepository shareDataWeeklyRepository;
+
 
     @Autowired
-    public ShareItemService(ShareItemRepository shareItemRepository, ShareDataDailyRepository shareDataDailyRepository) {
+    public ShareItemService(ShareItemRepository shareItemRepository, ShareDataDailyRepository shareDataDailyRepository, ShareDataWeeklyRepository shareDataWeeklyRepository) {
         this.shareItemRepository = shareItemRepository;
         this.shareDataDailyRepository = shareDataDailyRepository;
+        this.shareDataWeeklyRepository = shareDataWeeklyRepository;
     }
 
     public List<ShareItem> getShareItems(){
@@ -54,11 +58,28 @@ public class ShareItemService {
         String shareDataDailyObj = webClientToGetDaily.getShareInfoFromApiBySymbol(symbol);
 
 
-        List<ShareDataDaily> shareDataDailies = ShareObjectMapper.shareDataObjectMapper(shareDataDailyObj, shareItem);
+        List<ShareDataDaily> shareDataDailies = ShareObjectMapper.shareDataDailyObjectMapper(shareDataDailyObj, shareItem);
 
         shareDataDailyRepository.saveAll(shareDataDailies);
 
         shareItem.setShareDataDailies(shareDataDailies);
+
+        //Get the ShareDataWeeklies info from 3rd party API
+        properties.setEndPoint(WebClientUrlEnum.WEEKLY_DATA.getUrl());
+        WebClientToGetAPI webClientToGetWeekly = new WebClientToGetAPI(WebClient.create(), properties);
+
+        String shareDataWeeklyObj = webClientToGetWeekly.getShareInfoFromApiBySymbol(symbol);
+
+
+        List<ShareDataWeekly> shareDataWeeklies = ShareObjectMapper.shareDataWeeklyObjectMapper(shareDataWeeklyObj, shareItem);
+
+        shareDataWeeklyRepository.saveAll(shareDataWeeklies);
+
+        shareItem.setShareDataWeeklies(shareDataWeeklies);
+
+
+
+
 
         return shareItem;
     }

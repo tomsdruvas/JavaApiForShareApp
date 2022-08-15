@@ -1,7 +1,7 @@
 package com.example.demo.shareItem;
 
-import com.example.demo.investor.Investor;
 import com.example.demo.shareDataDaily.ShareDataDailyRepository;
+import com.example.demo.shareDataWeekly.ShareDataWeeklyRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -21,13 +21,15 @@ class ShareItemServiceTest {
     private ShareItemRepository shareItemRepository;
     @Mock
     private ShareDataDailyRepository shareDataDailyRepository;
+    @Mock
+    private ShareDataWeeklyRepository shareDataWeeklyRepository;
     private ShareItemService underTest;
 
     private ShareItem shareItem;
 
     @BeforeEach
     void setUp() {
-        underTest = new ShareItemService(shareItemRepository, shareDataDailyRepository);
+        underTest = new ShareItemService(shareItemRepository, shareDataDailyRepository, shareDataWeeklyRepository);
         shareItem = new ShareItem("Amazon","AMZN", 30.00, Date.valueOf("2022-02-20"));
         shareItemRepository.save(shareItem);
 

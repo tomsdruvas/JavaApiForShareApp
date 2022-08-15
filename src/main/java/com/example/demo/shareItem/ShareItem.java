@@ -1,6 +1,7 @@
 package com.example.demo.shareItem;
 
 import com.example.demo.shareDataDaily.ShareDataDaily;
+import com.example.demo.shareDataWeekly.ShareDataWeekly;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
@@ -50,6 +51,10 @@ public class ShareItem {
     @OneToMany(mappedBy = "shareItem", fetch = FetchType.LAZY)
     @OrderBy("date")
     private List<ShareDataDaily> shareDataDailies;
+
+    @OneToMany(mappedBy = "shareItem", fetch = FetchType.LAZY)
+    @OrderBy("date")
+    private List<ShareDataWeekly> shareDataWeeklies;
 
 
 

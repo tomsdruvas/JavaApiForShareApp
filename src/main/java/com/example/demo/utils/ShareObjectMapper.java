@@ -1,6 +1,7 @@
 package com.example.demo.utils;
 
 import com.example.demo.shareDataDaily.ShareDataDaily;
+import com.example.demo.shareDataWeekly.ShareDataWeekly;
 import com.example.demo.shareItem.ShareItem;
 import org.json.JSONObject;
 
@@ -15,7 +16,7 @@ import java.util.stream.Collectors;
 
 public class ShareObjectMapper {
 
-    public static List<ShareDataDaily> shareDataObjectMapper(String response, ShareItem shareItem){
+    public static List<ShareDataDaily> shareDataDailyObjectMapper(String response, ShareItem shareItem){
         JSONObject dailyDataJsonObj = new JSONObject(response);
 
         String symbolFromObj = dailyDataJsonObj.getJSONObject("Meta Data").getString("2. Symbol");
@@ -24,6 +25,21 @@ public class ShareObjectMapper {
         List<ShareDataDaily> listOfData = timeSeriesDailyJsonObj.keySet().stream()
                 .map(date -> new ShareDataDaily(symbolFromObj, Date.valueOf(date), timeSeriesDailyJsonObj.getJSONObject(date).getDouble("1. open"), shareItem))
                 .sorted(Comparator.comparing(ShareDataDaily::getDate))
+                .collect(Collectors.toList());
+
+        return listOfData;
+
+    }
+
+    public static List<ShareDataWeekly> shareDataWeeklyObjectMapper(String response, ShareItem shareItem){
+        JSONObject weeklyDataJsonObj = new JSONObject(response);
+
+        String symbolFromObj = weeklyDataJsonObj.getJSONObject("Meta Data").getString("2. Symbol");
+        JSONObject timeSeriesWeeklyJsonObj = weeklyDataJsonObj.getJSONObject("Weekly Time Series");
+
+        List<ShareDataWeekly> listOfData = timeSeriesWeeklyJsonObj.keySet().stream()
+                .map(date -> new ShareDataWeekly(symbolFromObj, Date.valueOf(date), timeSeriesWeeklyJsonObj.getJSONObject(date).getDouble("1. open"), shareItem))
+                .sorted(Comparator.comparing(ShareDataWeekly::getDate))
                 .collect(Collectors.toList());
 
         return listOfData;
