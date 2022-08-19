@@ -3,6 +3,7 @@ package com.example.demo.commentVote;
 import com.example.demo.comment.Comment;
 import com.example.demo.investor.Investor;
 import com.example.demo.utils.VoteEnum;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
@@ -30,17 +31,31 @@ public class CommentVote {
     )
     private Long id;
 
+    @Column(name = "investor_id")
+    private Long investorId;
+
+    @JsonIgnore
     @ManyToOne
+    @JoinColumn(name = "investor_id", insertable = false, updatable = false)
     @NonNull
     private Investor investor;
 
+    @Column(name = "comment_id")
+    private Long commentId;
+
+    @JsonIgnore
     @ManyToOne
+    @JoinColumn(name = "comment_id", insertable = false, updatable = false)
     @NonNull
     private Comment comment;
 
     @Column
     @NonNull
-    private Enum<VoteEnum> voteDirection;
+    private VoteEnum voteDirection;
 
-
+    public CommentVote(Long investorId, Long commentId, @NonNull VoteEnum voteDirection) {
+        this.investorId = investorId;
+        this.commentId = commentId;
+        this.voteDirection = voteDirection;
+    }
 }

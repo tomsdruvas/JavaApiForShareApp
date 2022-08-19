@@ -1,11 +1,21 @@
 package com.example.demo.utils;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public enum VoteEnum {
-    UP,
-    DOWN;
 
+    UP("UP"),
+    DOWN("DOWN");
 
-    VoteEnum() {
+    private final String direction;
+
+    VoteEnum(String direction){
+        this.direction = direction;
+
+    }
+
+    public String getDirection(){
+        return direction;
     }
 
 }

@@ -1,5 +1,6 @@
 package com.example.demo.comment;
 
+import com.example.demo.commentVote.CommentVote;
 import com.example.demo.investor.Investor;
 import com.example.demo.portfolio.Portfolio;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -8,6 +9,7 @@ import lombok.*;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 @Entity
 @Table
@@ -56,6 +58,11 @@ public class Comment {
     @Column
     @NonNull
     private String content;
+
+    @OneToMany
+    @JoinColumn(name = "comment_id")
+    private Set<CommentVote> commentVotes;
+
 
     public Comment(Long id, Long investorId, Long portfolioId, @NonNull Date date, @NonNull String content) {
         this.id = id;
