@@ -3,16 +3,16 @@ package com.example.demo.commentVote;
 import com.example.demo.comment.Comment;
 import com.example.demo.comment.CommentRepository;
 
-import com.example.demo.investment.Investment;
+
 import com.example.demo.investor.Investor;
 import com.example.demo.investor.InvestorRepository;
 import com.example.demo.portfolio.Portfolio;
 import com.example.demo.portfolio.PortfolioRepository;
 
 import com.example.demo.utils.VoteEnum;
-import com.fasterxml.jackson.core.JsonProcessingException;
+
 import com.fasterxml.jackson.databind.ObjectMapper;
-import org.assertj.core.api.Assertions;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
