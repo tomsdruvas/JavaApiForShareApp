@@ -1,5 +1,7 @@
-package com.example.demo.comment;
+package com.example.demo.commentVote;
 
+import com.example.demo.comment.Comment;
+import com.example.demo.comment.CommentRepository;
 import com.example.demo.commentVote.CommentVote;
 import com.example.demo.commentVote.CommentVoteRepository;
 import com.example.demo.investor.Investor;
@@ -44,7 +46,7 @@ class CommentVoteRepositoryTest {
         Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), investor, true);
         portfolioRepository.save(portfolio);
 
-        Comment comment = new Comment(investor, portfolio, Date.valueOf("2022-08-02"), "This porfolio is looking nice");
+        Comment comment = new Comment(investor, portfolio, Date.valueOf("2022-08-02"), "This portfolio is looking nice");
         commentRepository.save(comment);
 
         CommentVote commentVote = new CommentVote(investor, comment, VoteEnum.UP);
@@ -60,7 +62,7 @@ class CommentVoteRepositoryTest {
 
 
     @Test
-    void sameUserShouldNotBeAbleToVoteTwiceOnTheSameComment(){
+    void sameUserShouldNotBeAbleToVoteTwiceOnTheSameComment  (){
 
         Investor investor = new Investor("Jack", "ir@financialshop.com");
         investorRepository.save(investor);
@@ -71,10 +73,10 @@ class CommentVoteRepositoryTest {
         Comment comment = new Comment(investor, portfolio, Date.valueOf("2022-08-02"), "This porfolio is looking nice");
         commentRepository.save(comment);
 
-        CommentVote commentVoteUp = new CommentVote(investor, comment, VoteEnum.UP);
+        CommentVote commentVoteUp = new CommentVote(investor.getId(), comment.getId(), VoteEnum.UP);
         underTest.save(commentVoteUp);
 
-        CommentVote commentVoteDown = new CommentVote(investor, comment, VoteEnum.UP);
+        CommentVote commentVoteDown = new CommentVote(investor.getId(), comment.getId(), VoteEnum.UP);
         assertThrows(DataIntegrityViolationException.class, () -> underTest.saveAndFlush(commentVoteDown));
 
     }

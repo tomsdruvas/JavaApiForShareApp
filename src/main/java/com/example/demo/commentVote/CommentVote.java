@@ -58,4 +58,11 @@ public class CommentVote {
         this.commentId = commentId;
         this.voteDirection = voteDirection;
     }
+
+    public CommentVote(Long id, Long investorId, Long commentId, @NonNull VoteEnum voteDirection) {
+        this.id = id;
+        this.investorId = investorId;
+        this.commentId = commentId;
+        this.voteDirection = voteDirection;
+    }
 }
