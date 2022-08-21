@@ -76,13 +76,13 @@ class CommentVoteServiceTest {
     }
 
     @Test
-    void removeCommentVoteByID() {
+    void removeCommentVoteByID_success() {
 
         when(commentVoteRepository.existsById(1L)).thenReturn(true);
 
         doNothing().when(commentVoteRepository).deleteById(1L);
 
-        underTest.removeCommentVoteByID(1L);
+        underTest.removeCommentVoteById(1L);
 
         verify(commentVoteRepository).existsById(1L);
         verify(commentVoteRepository).deleteById(1L);

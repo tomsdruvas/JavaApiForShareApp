@@ -35,7 +35,7 @@ public class CommentVoteService {
         return commentVoteRepository.save(commentVote);
     }
 
-    public void removeCommentVoteByID(Long commentVoteId) throws EntityNotFoundException {
+    public void removeCommentVoteById(Long commentVoteId) throws EntityNotFoundException {
         boolean exists = commentVoteRepository.existsById(commentVoteId);
         if (!exists) {
             throw new EntityNotFoundException("CommentVote with" + commentVoteId + "doesn't exist");

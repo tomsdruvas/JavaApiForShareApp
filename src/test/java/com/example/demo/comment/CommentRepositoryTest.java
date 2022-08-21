@@ -7,6 +7,7 @@ import com.example.demo.portfolio.PortfolioRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+import org.springframework.test.context.jdbc.Sql;
 
 import java.sql.Date;
 import java.util.List;
@@ -42,6 +43,16 @@ class CommentRepositoryTest {
 
         assertEquals(commentList.size(),1);
         assertEquals(commentList.get(0).getContent(),"This porfolio is looking nice");
+    }
+
+    @Test
+    @Sql("/test-db-setup.sql")
+    void findCommentsByPortfolioId(){
+        Long id = portfolioRepository.findAll().get(0).getId();
+        List<Comment> commentList = underTest.findCommentsByPortfolioId(id);
+
+        assertTrue(commentList.size() > 0);
+
     }
 
 }

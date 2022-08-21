@@ -42,7 +42,6 @@ class CommentVoteControllerTest {
     private CommentVoteRepository commentVoteRepository;
     private CommentVote commentVote;
     private CommentVote commentVote2;
-    private CommentVote commentVote3;
 
 
 

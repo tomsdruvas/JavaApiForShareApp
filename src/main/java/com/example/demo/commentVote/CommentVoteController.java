@@ -1,7 +1,5 @@
 package com.example.demo.commentVote;
 
-
-import com.example.demo.investment.Investment;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -40,7 +38,7 @@ public class CommentVoteController {
     @DeleteMapping("/{id}")
     public void  deleteCommentVote(@PathVariable(value = "id") Long id){
         try {
-            commentVoteService.removeCommentVoteByID(id);
+            commentVoteService.removeCommentVoteById(id);
         }
         catch (EntityNotFoundException exc){
             throw new ResponseStatusException(

@@ -38,7 +38,7 @@ class CommentVoteRepositoryTest {
 
 
     @Test
-    void shouldBeAbleToCreateAComment(){
+    void shouldBeAbleToCreateACommentVote_success(){
 
         Investor investor = new Investor("Jack", "ir@financialshop.com");
         investorRepository.save(investor);
@@ -59,10 +59,8 @@ class CommentVoteRepositoryTest {
 
     }
 
-
-
     @Test
-    void sameUserShouldNotBeAbleToVoteTwiceOnTheSameComment  (){
+    void shouldBeAbleToUpdateACommentVote_success(){
 
         Investor investor = new Investor("Jack", "ir@financialshop.com");
         investorRepository.save(investor);
@@ -70,25 +68,69 @@ class CommentVoteRepositoryTest {
         Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), investor, true);
         portfolioRepository.save(portfolio);
 
-        Comment comment = new Comment(investor, portfolio, Date.valueOf("2022-08-02"), "This porfolio is looking nice");
+        Comment comment = new Comment(investor, portfolio, Date.valueOf("2022-08-02"), "This portfolio is looking nice");
+        commentRepository.save(comment);
+
+        CommentVote commentVote = new CommentVote(investor, comment, VoteEnum.UP);
+        underTest.save(commentVote);
+
+        List<CommentVote> commentVoteList = underTest.findAll();
+
+        CommentVote commentVoteEntity = commentVoteList.get(0);
+        commentVoteEntity.setVoteDirection(VoteEnum.DOWN);
+        underTest.save(commentVoteEntity);
+
+        List<CommentVote> updatedCommentVoteList = underTest.findAll();
+        assertEquals(updatedCommentVoteList.get(0).getVoteDirection().toString(), "DOWN");
+
+    }
+
+
+
+    @Test
+    void sameUserShouldNotBeAbleToVoteTwiceOnTheSameComment_Exception  (){
+
+        Investor investor = new Investor("Jack", "ir@financialshop.com");
+        investorRepository.save(investor);
+
+        Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), investor, true);
+        portfolioRepository.save(portfolio);
+
+        Comment comment = new Comment(investor, portfolio, Date.valueOf("2022-08-02"), "This portfolio is looking nice");
         commentRepository.save(comment);
 
         CommentVote commentVoteUp = new CommentVote(investor.getId(), comment.getId(), VoteEnum.UP);
         underTest.save(commentVoteUp);
 
-        CommentVote commentVoteDown = new CommentVote(investor.getId(), comment.getId(), VoteEnum.UP);
+        CommentVote commentVoteDown = new CommentVote(investor.getId(), comment.getId(), VoteEnum.DOWN);
         assertThrows(DataIntegrityViolationException.class, () -> underTest.saveAndFlush(commentVoteDown));
 
     }
 
     @Test
-    @Sql("/test-db-setup.sql")
-    void findCommentsByPortfolioId(){
-        Long id = portfolioRepository.findAll().get(0).getId();
-        List<Comment> commentList = commentRepository.findCommentsByPortfolioId(id);
+    void shouldBeAbleToDeleteACommentVoteById_success(){
 
-        assertTrue(commentList.size() > 0);
+        Investor investor = new Investor("Jack", "ir@financialshop.com");
+        investorRepository.save(investor);
+
+        Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), investor, true);
+        portfolioRepository.save(portfolio);
+
+        Comment comment = new Comment(investor, portfolio, Date.valueOf("2022-08-02"), "This portfolio is looking nice");
+        commentRepository.save(comment);
+
+        CommentVote commentVote = new CommentVote(investor, comment, VoteEnum.UP);
+        underTest.save(commentVote);
+
+        List<CommentVote> commentVoteList = underTest.findAll();
+
+        underTest.deleteById(commentVoteList.get(0).getId());
+
+        List<CommentVote> updatedCommentVoteList = underTest.findAll();
+        assertEquals(updatedCommentVoteList.size(), 0);
 
     }
+
+
 
 }
