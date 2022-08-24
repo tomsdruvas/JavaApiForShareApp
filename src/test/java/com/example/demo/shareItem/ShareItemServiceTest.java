@@ -11,6 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension;
 
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.doReturn;
@@ -31,7 +32,7 @@ class ShareItemServiceTest {
     @BeforeEach
     void setUp() {
         underTest = new ShareItemService(shareItemRepository, shareDataDailyRepository, shareDataWeeklyRepository);
-        shareItem = new ShareItem("Amazon","AMZN", 30.00, CurrencyEnum.USD, Date.valueOf("2022-02-20"));
+        shareItem = new ShareItem("Amazon","AMZN", 30.00, CurrencyEnum.USD, Date.valueOf("2022-02-20"), LocalDateTime.now(), true);
         shareItemRepository.save(shareItem);
 
     }
@@ -45,7 +46,7 @@ class ShareItemServiceTest {
 
     @Test
     void canGetShareItemFromService() {
-        ShareItem shareItemEntity = new ShareItem("Amazon","AMZN", 30.00, CurrencyEnum.USD, Date.valueOf("2022-02-20"));
+        ShareItem shareItemEntity = new ShareItem("Amazon","AMZN", 30.00, CurrencyEnum.USD, Date.valueOf("2022-02-20"), LocalDateTime.now(), true);
 
         doReturn(true).when(shareItemRepository).existsBySymbol("AMZN");
         doReturn(shareItemEntity).when(shareItemRepository).findShareItemBySymbol("AMZN");

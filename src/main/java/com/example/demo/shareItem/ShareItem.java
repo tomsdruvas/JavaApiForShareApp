@@ -4,6 +4,7 @@ import com.example.demo.shareDataDaily.ShareDataDaily;
 import com.example.demo.shareDataWeekly.ShareDataWeekly;
 import com.example.demo.utils.CurrencyEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -54,6 +55,16 @@ public class ShareItem {
     @JsonFormat(pattern = "dd/MM/yyyy")
     @NonNull
     private Date updatedAt;
+
+    @Column(nullable = false)
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+    @NonNull
+    private LocalDateTime addedAt;
+
+    @JsonIgnore
+    @Column(nullable = false)
+    @NonNull
+    private Boolean outstandingTask;
 
     @OneToMany(mappedBy = "shareItem", fetch = FetchType.LAZY)
     @OrderBy("date")

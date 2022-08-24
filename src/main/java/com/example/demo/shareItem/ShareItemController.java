@@ -1,6 +1,8 @@
 package com.example.demo.shareItem;
 
 
+import com.example.demo.investor.Investor;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -30,6 +32,11 @@ public class ShareItemController {
     public ShareItem getShareItemBySymbol(@PathVariable("symbol") String symbol) {
 
         return shareItemService.getShareItem(symbol);
+    }
+
+    @PostMapping()
+    public ShareItem newShareItem(@Valid @RequestBody ShareItem newShareItem) {
+        return shareItemService.save(newShareItem);
     }
 
 }

@@ -12,6 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 
 import static org.hamcrest.Matchers.hasSize;
 import static org.junit.jupiter.api.Assertions.*;
@@ -36,7 +37,7 @@ class ShareItemControllerTest {
 
     @BeforeEach
     void init() {
-        shareItem = new ShareItem("Amazon", "AMZN", 10.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"));
+        shareItem = new ShareItem("Amazon", "AMZN", 10.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"), LocalDateTime.now(), true);
         shareItemRepository.save(shareItem);
 
     }

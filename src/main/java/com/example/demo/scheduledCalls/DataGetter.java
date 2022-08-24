@@ -1,4 +1,4 @@
-package com.example.demo.schedueledCalls;
+package com.example.demo.scheduledCalls;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Configuration;

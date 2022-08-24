@@ -20,7 +20,7 @@ class ShareItemRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"));
+        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"), LocalDateTime.now(), true);
         underTest.save(shareItem);
     }
 

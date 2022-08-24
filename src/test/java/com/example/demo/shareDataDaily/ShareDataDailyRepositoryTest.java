@@ -10,6 +10,7 @@ import org.springframework.dao.DataIntegrityViolationException;
 
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
@@ -28,7 +29,7 @@ class ShareDataDailyRepositoryTest {
     @Test
     void itShouldFindShareDataDailyBySymbol() {
 
-        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"));
+        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"), LocalDateTime.now(), true);
         shareItemRepository.save(shareItem);
 
         ShareDataDaily shareDataDaily = new ShareDataDaily("AMZN", Date.valueOf("2022-08-02"), 20.56, shareItem);
@@ -49,7 +50,7 @@ class ShareDataDailyRepositoryTest {
 
     @Test
     void shareDataDailyAreUniqueByDateAndSymbol(){
-        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"));
+        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"), LocalDateTime.now(), true);
         shareItemRepository.save(shareItem);
 
         ShareDataDaily shareDataDaily = new ShareDataDaily("AMZN", Date.valueOf("2022-08-02"), 20.56, shareItem);
@@ -61,7 +62,7 @@ class ShareDataDailyRepositoryTest {
 
     @Test
     void canDeleteShareData(){
-        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"));
+        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"), LocalDateTime.now(), true);
         shareItemRepository.save(shareItem);
 
         ShareDataDaily shareDataDaily = new ShareDataDaily("AMZN", Date.valueOf("2022-08-02"), 20.56, shareItem);

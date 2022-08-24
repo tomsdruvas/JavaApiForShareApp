@@ -20,6 +20,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
 import java.sql.Date;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -75,8 +76,8 @@ class InvestmentControllerTest {
         Long investorId = investorRepository.save(investor).getId();
         Long investorId2 = investorRepository.save(investor2).getId();
 
-        shareItem = new ShareItem("Amazon", "AMZN", 10.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"));
-        shareItem2 = new ShareItem("Microsoft", "MSFT", 30.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"));
+        shareItem = new ShareItem("Amazon", "AMZN", 10.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"), LocalDateTime.now(), true);
+        shareItem2 = new ShareItem("Microsoft", "MSFT", 30.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"), LocalDateTime.now(), true);
         Long shareItemId = shareItemRepository.save(shareItem).getId();
         Long shareItemId2 = shareItemRepository.save(shareItem2).getId();
 
