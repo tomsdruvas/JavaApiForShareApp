@@ -2,6 +2,7 @@ package com.example.demo.shareDataDaily;
 
 import com.example.demo.shareItem.ShareItem;
 import com.example.demo.shareItem.ShareItemRepository;
+import com.example.demo.utils.CurrencyEnum;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -27,7 +28,7 @@ class ShareDataDailyRepositoryTest {
     @Test
     void itShouldFindShareDataDailyBySymbol() {
 
-        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, Date.valueOf("2022-08-02"));
+        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"));
         shareItemRepository.save(shareItem);
 
         ShareDataDaily shareDataDaily = new ShareDataDaily("AMZN", Date.valueOf("2022-08-02"), 20.56, shareItem);
@@ -48,7 +49,7 @@ class ShareDataDailyRepositoryTest {
 
     @Test
     void shareDataDailyAreUniqueByDateAndSymbol(){
-        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, Date.valueOf("2022-08-02"));
+        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"));
         shareItemRepository.save(shareItem);
 
         ShareDataDaily shareDataDaily = new ShareDataDaily("AMZN", Date.valueOf("2022-08-02"), 20.56, shareItem);
@@ -60,7 +61,7 @@ class ShareDataDailyRepositoryTest {
 
     @Test
     void canDeleteShareData(){
-        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, Date.valueOf("2022-08-02"));
+        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"));
         shareItemRepository.save(shareItem);
 
         ShareDataDaily shareDataDaily = new ShareDataDaily("AMZN", Date.valueOf("2022-08-02"), 20.56, shareItem);

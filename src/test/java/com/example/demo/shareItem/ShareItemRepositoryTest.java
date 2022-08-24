@@ -1,5 +1,6 @@
 package com.example.demo.shareItem;
 
+import com.example.demo.utils.CurrencyEnum;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,7 +20,7 @@ class ShareItemRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, Date.valueOf("2022-08-02"));
+        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"));
         underTest.save(shareItem);
     }
 

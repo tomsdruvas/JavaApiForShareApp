@@ -2,6 +2,7 @@ package com.example.demo.shareItem;
 
 import com.example.demo.shareDataDaily.ShareDataDaily;
 import com.example.demo.shareDataWeekly.ShareDataWeekly;
+import com.example.demo.utils.CurrencyEnum;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.*;
 import org.hibernate.annotations.Fetch;
@@ -9,6 +10,7 @@ import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.Currency;
 import java.util.Date;
 import java.util.List;
 
@@ -43,6 +45,11 @@ public class ShareItem {
     @Column(nullable = false)
     @NonNull
     private Double price;
+
+    @Column(nullable = false)
+    @NonNull
+    private CurrencyEnum currency;
+
     @Column(nullable = false)
     @JsonFormat(pattern = "dd/MM/yyyy")
     @NonNull
@@ -56,17 +63,5 @@ public class ShareItem {
     @OrderBy("date")
     private List<ShareDataWeekly> shareDataWeeklies;
 
-
-
-    @Override
-    public String toString() {
-        return "ShareItem{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", symbol='" + symbol + '\'' +
-                ", price=" + price +
-                ", updatedAt=" + updatedAt +
-                '}';
-    }
 
 }

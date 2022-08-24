@@ -1,6 +1,7 @@
 package com.example.demo.shareItem;
 
 import com.example.demo.investor.Investor;
+import com.example.demo.utils.CurrencyEnum;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -35,7 +36,7 @@ class ShareItemControllerTest {
 
     @BeforeEach
     void init() {
-        shareItem = new ShareItem("Amazon", "AMZN", 10.00, Date.valueOf("2022-08-02"));
+        shareItem = new ShareItem("Amazon", "AMZN", 10.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"));
         shareItemRepository.save(shareItem);
 
     }

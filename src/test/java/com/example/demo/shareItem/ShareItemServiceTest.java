@@ -2,6 +2,7 @@ package com.example.demo.shareItem;
 
 import com.example.demo.shareDataDaily.ShareDataDailyRepository;
 import com.example.demo.shareDataWeekly.ShareDataWeeklyRepository;
+import com.example.demo.utils.CurrencyEnum;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -30,7 +31,7 @@ class ShareItemServiceTest {
     @BeforeEach
     void setUp() {
         underTest = new ShareItemService(shareItemRepository, shareDataDailyRepository, shareDataWeeklyRepository);
-        shareItem = new ShareItem("Amazon","AMZN", 30.00, Date.valueOf("2022-02-20"));
+        shareItem = new ShareItem("Amazon","AMZN", 30.00, CurrencyEnum.USD, Date.valueOf("2022-02-20"));
         shareItemRepository.save(shareItem);
 
     }
@@ -44,7 +45,7 @@ class ShareItemServiceTest {
 
     @Test
     void canGetShareItemFromService() {
-        ShareItem shareItemEntity = new ShareItem("Amazon","AMZN", 30.00, Date.valueOf("2022-02-20"));
+        ShareItem shareItemEntity = new ShareItem("Amazon","AMZN", 30.00, CurrencyEnum.USD, Date.valueOf("2022-02-20"));
 
         doReturn(true).when(shareItemRepository).existsBySymbol("AMZN");
         doReturn(shareItemEntity).when(shareItemRepository).findShareItemBySymbol("AMZN");

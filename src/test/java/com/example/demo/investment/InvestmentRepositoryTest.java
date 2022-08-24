@@ -6,6 +6,7 @@ import com.example.demo.portfolio.Portfolio;
 import com.example.demo.portfolio.PortfolioRepository;
 import com.example.demo.shareItem.ShareItem;
 import com.example.demo.shareItem.ShareItemRepository;
+import com.example.demo.utils.CurrencyEnum;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -32,7 +33,7 @@ class InvestmentRepositoryTest {
 
     @Test
     void shouldBeAbleToCreateAnInvestment(){
-        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, Date.valueOf("2022-08-02"));
+        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"));
         shareItemRepository.save(shareItem);
 
         Investor investor = new Investor("Jack", "ir@financialshop.com");

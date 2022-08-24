@@ -6,6 +6,7 @@ import com.example.demo.portfolio.Portfolio;
 import com.example.demo.portfolio.PortfolioRepository;
 import com.example.demo.shareItem.ShareItem;
 import com.example.demo.shareItem.ShareItemRepository;
+import com.example.demo.utils.CurrencyEnum;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
@@ -74,8 +75,8 @@ class InvestmentControllerTest {
         Long investorId = investorRepository.save(investor).getId();
         Long investorId2 = investorRepository.save(investor2).getId();
 
-        shareItem = new ShareItem("Amazon", "AMZN", 10.00, Date.valueOf("2022-08-02"));
-        shareItem2 = new ShareItem("Microsoft", "MSFT", 30.00, Date.valueOf("2022-08-02"));
+        shareItem = new ShareItem("Amazon", "AMZN", 10.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"));
+        shareItem2 = new ShareItem("Microsoft", "MSFT", 30.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"));
         Long shareItemId = shareItemRepository.save(shareItem).getId();
         Long shareItemId2 = shareItemRepository.save(shareItem2).getId();
 
