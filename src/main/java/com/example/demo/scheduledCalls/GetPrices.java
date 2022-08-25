@@ -45,14 +45,12 @@ public class GetPrices {
                 break;
             default:
                 System.out.println("There are " + shareItemList.size() + " in the queue. Next is " + currentShareItem.getName());
+                getDailyData(currentShareItem);
+                getWeeklyData(currentShareItem);
+
+                currentShareItem.setOutstandingTask(false);
+                shareItemRepository.save(currentShareItem);
         }
-
-
-        getDailyData(currentShareItem);
-        getWeeklyData(currentShareItem);
-
-        currentShareItem.setOutstandingTask(false);
-        shareItemRepository.save(currentShareItem);
 
         Thread.sleep(8000);
     }
