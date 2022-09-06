@@ -48,7 +48,6 @@ class ShareItemServiceTest {
     void canGetShareItemFromService() {
         ShareItem shareItemEntity = new ShareItem("Amazon","AMZN", 30.00, CurrencyEnum.USD, Date.valueOf("2022-02-20"), LocalDateTime.now(), true);
 
-        doReturn(true).when(shareItemRepository).existsBySymbol("AMZN");
         doReturn(shareItemEntity).when(shareItemRepository).findShareItemBySymbol("AMZN");
 
         ShareItem shareItemEntityFromService = underTest.getShareItem("AMZN");

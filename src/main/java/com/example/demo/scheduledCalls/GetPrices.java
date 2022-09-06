@@ -37,13 +37,15 @@ public class GetPrices {
     public void getMissingPrices() throws InterruptedException {
 
         List<ShareItem> shareItemList = shareItemRepository.findShareItemsByOutstandingTaskTrueOrderByAddedAtAsc();
-        ShareItem currentShareItem = shareItemList.get(0);
+
+
 
         switch (shareItemList.size()){
             case 0:
                 System.out.println("There are " + 0 + " in the queue");
                 break;
             default:
+                ShareItem currentShareItem = shareItemList.get(0);
                 System.out.println("There are " + shareItemList.size() + " in the queue. Next is " + currentShareItem.getName());
                 getDailyData(currentShareItem);
                 getWeeklyData(currentShareItem);
