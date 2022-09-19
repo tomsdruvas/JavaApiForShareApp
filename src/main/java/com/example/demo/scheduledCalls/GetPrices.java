@@ -42,11 +42,11 @@ public class GetPrices {
 
         switch (shareItemList.size()){
             case 0:
-                System.out.println("There are " + 0 + " in the queue");
+                System.out.println("There are " + 0 + " tasks in the queue");
                 break;
             default:
                 ShareItem currentShareItem = shareItemList.get(0);
-                System.out.println("There are " + shareItemList.size() + " in the queue. Next is " + currentShareItem.getName());
+                System.out.println("There are " + shareItemList.size() + " tasks in the queue. Next is " + currentShareItem.getName());
                 getDailyData(currentShareItem);
                 getWeeklyData(currentShareItem);
 
