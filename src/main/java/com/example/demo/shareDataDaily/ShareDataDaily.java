@@ -25,7 +25,6 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 
-
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueDateAndSymbol",
         columnNames = { "date", "symbol" }) })

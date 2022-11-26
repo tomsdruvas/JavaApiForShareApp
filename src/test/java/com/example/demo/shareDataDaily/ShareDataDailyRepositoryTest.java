@@ -75,7 +75,5 @@ class ShareDataDailyRepositoryTest {
 
 
         assertThat(foundInDB.size()).isEqualTo(0);
-
     }
-
 }

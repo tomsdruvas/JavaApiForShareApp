@@ -1,6 +1,9 @@
 package com.example.demo.utils;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.sql.Date;
+import java.text.NumberFormat;
 import java.time.LocalDate;
 import java.util.Comparator;
 import java.util.List;
@@ -35,12 +38,10 @@ public class ShareObjectMapper {
         String symbolFromObj = weeklyDataJsonObj.getJSONObject("Meta Data").getString("2. Symbol");
         JSONObject timeSeriesWeeklyJsonObj = weeklyDataJsonObj.getJSONObject("Weekly Time Series");
 
-        List<ShareDataWeekly> listOfData = timeSeriesWeeklyJsonObj.keySet().stream()
-                .map(date -> new ShareDataWeekly(symbolFromObj, Date.valueOf(date), timeSeriesWeeklyJsonObj.getJSONObject(date).getBigDecimal("1. open"), shareItem))
+        return timeSeriesWeeklyJsonObj.keySet().stream()
+                .map(date -> new ShareDataWeekly(symbolFromObj, Date.valueOf(date), timeSeriesWeeklyJsonObj.getJSONObject(date).getBigDecimal("1. open").setScale(5, RoundingMode.HALF_UP), shareItem))
                 .sorted(Comparator.comparing(ShareDataWeekly::getDate))
-                .collect(Collectors.toList());
-
-        return listOfData;
+                .toList();
 
     }
 

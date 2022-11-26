@@ -47,7 +47,7 @@ public class GetPrices {
             default:
                 ShareItem currentShareItem = shareItemList.get(0);
                 System.out.println("There are " + shareItemList.size() + " tasks in the queue. Next is " + currentShareItem.getName());
-                getDailyData(currentShareItem);
+//                getDailyData(currentShareItem);
                 getWeeklyData(currentShareItem);
 
                 currentShareItem.setOutstandingTask(false);

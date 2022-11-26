@@ -42,7 +42,6 @@ public class ShareItemService {
 
     }
 
-
     public ShareItem save(ShareItem newShareItem) {
         newShareItem.setOutstandingTask(true);
         newShareItem.setUpdatedAt(Date.valueOf(LocalDate.now()));

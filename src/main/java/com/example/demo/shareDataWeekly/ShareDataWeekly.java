@@ -15,7 +15,10 @@ import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.DecimalMin;
+import javax.validation.constraints.Digits;
 
+import com.example.demo.shareDataDaily.ShareDataDaily;
 import com.example.demo.shareItem.ShareItem;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -48,14 +51,17 @@ public class ShareDataWeekly {
     )
     @JsonIgnore
     private Long id;
+
     @Column(nullable = false)
     @JsonIgnore
     @NonNull
     private String symbol;
+
     @Column(nullable = false)
     @JsonFormat(pattern = "dd/MM/yyyy")
     @NonNull
     private Date date;
+
     @Column
     @NonNull
     private BigDecimal openPrice;
