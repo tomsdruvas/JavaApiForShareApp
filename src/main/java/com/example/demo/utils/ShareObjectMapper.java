@@ -1,18 +1,16 @@
 package com.example.demo.utils;
 
+import java.sql.Date;
+import java.time.LocalDate;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+
+import org.json.JSONObject;
+
 import com.example.demo.shareDataDaily.ShareDataDaily;
 import com.example.demo.shareDataWeekly.ShareDataWeekly;
 import com.example.demo.shareItem.ShareItem;
-import org.json.JSONObject;
-
-import java.sql.Date;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Locale;
-import java.util.stream.Collectors;
 
 public class ShareObjectMapper {
 
@@ -23,7 +21,7 @@ public class ShareObjectMapper {
         JSONObject timeSeriesDailyJsonObj = dailyDataJsonObj.getJSONObject("Time Series (Daily)");
 
         List<ShareDataDaily> listOfData = timeSeriesDailyJsonObj.keySet().stream()
-                .map(date -> new ShareDataDaily(symbolFromObj, Date.valueOf(date), timeSeriesDailyJsonObj.getJSONObject(date).getDouble("1. open"), shareItem))
+                .map(date -> new ShareDataDaily(symbolFromObj, Date.valueOf(date), timeSeriesDailyJsonObj.getJSONObject(date).getBigDecimal("1. open"), shareItem))
                 .sorted(Comparator.comparing(ShareDataDaily::getDate))
                 .collect(Collectors.toList());
 
@@ -38,7 +36,7 @@ public class ShareObjectMapper {
         JSONObject timeSeriesWeeklyJsonObj = weeklyDataJsonObj.getJSONObject("Weekly Time Series");
 
         List<ShareDataWeekly> listOfData = timeSeriesWeeklyJsonObj.keySet().stream()
-                .map(date -> new ShareDataWeekly(symbolFromObj, Date.valueOf(date), timeSeriesWeeklyJsonObj.getJSONObject(date).getDouble("1. open"), shareItem))
+                .map(date -> new ShareDataWeekly(symbolFromObj, Date.valueOf(date), timeSeriesWeeklyJsonObj.getJSONObject(date).getBigDecimal("1. open"), shareItem))
                 .sorted(Comparator.comparing(ShareDataWeekly::getDate))
                 .collect(Collectors.toList());
 
@@ -52,7 +50,7 @@ public class ShareObjectMapper {
         ShareItem shareItem = new ShareItem();
         shareItem.setName(dailyDataJsonObj.getString("01. symbol"));
         shareItem.setSymbol(dailyDataJsonObj.getString("01. symbol"));
-        shareItem.setPrice(dailyDataJsonObj.getDouble("05. price"));
+        shareItem.setPrice(dailyDataJsonObj.getBigDecimal("05. price"));
         shareItem.setUpdatedAt(date);
 
         return shareItem;

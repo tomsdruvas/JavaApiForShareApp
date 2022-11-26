@@ -1,16 +1,18 @@
 package com.example.demo.shareItem;
 
-import com.example.demo.utils.CurrencyEnum;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import java.sql.Date;
-import java.time.LocalDateTime;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import com.example.demo.utils.CurrencyEnum;
 
 @DataJpaTest
 class ShareItemRepositoryTest {
@@ -20,7 +22,7 @@ class ShareItemRepositoryTest {
 
     @BeforeEach
     void setUp() {
-        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"), LocalDateTime.now(), true);
+        ShareItem shareItem = new ShareItem("Amazon", "AMZN", new BigDecimal("10.00"), CurrencyEnum.USD, Date.valueOf("2022-08-02"), LocalDateTime.now(), true);
         underTest.save(shareItem);
     }
 
@@ -37,8 +39,8 @@ class ShareItemRepositoryTest {
         ShareItem notfoundInDB = underTest.findShareItemBySymbol("MSFT");
 
 
-        assertThat(foundInDB.getPrice()).isEqualTo(10);
-        assertThat(notfoundInDB).isEqualTo(null);
+        assertThat(foundInDB.getPrice()).isEqualTo(new BigDecimal("10.00"));
+        assertThat(notfoundInDB).isNull();
 
     }
 

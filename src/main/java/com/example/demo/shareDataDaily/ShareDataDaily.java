@@ -1,12 +1,29 @@
 package com.example.demo.shareDataDaily;
 
+import java.math.BigDecimal;
+import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
 import com.example.demo.shareItem.ShareItem;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import lombok.*;
 
-import javax.persistence.*;
-import java.util.Date;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.Setter;
 
 
 @Entity
@@ -41,7 +58,7 @@ public class ShareDataDaily {
     private Date date;
     @Column
     @NonNull
-    private Double openPrice;
+    private BigDecimal openPrice;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "share_item_id")
@@ -49,7 +66,7 @@ public class ShareDataDaily {
     @NonNull
     private ShareItem shareItem;
 
-    public ShareDataDaily(String symbol, Date date, Double openPrice, ShareItem shareItem) {
+    public ShareDataDaily(String symbol, Date date, BigDecimal openPrice, ShareItem shareItem) {
         this.symbol = symbol;
         this.date = date;
         this.openPrice = openPrice;

@@ -1,18 +1,16 @@
 package com.example.demo.utils;
 
-import com.example.demo.shareDataDaily.ShareDataDaily;
-import com.example.demo.shareDataWeekly.ShareDataWeekly;
-import com.example.demo.shareItem.ShareItem;
-import org.junit.jupiter.api.Test;
-
-
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import com.example.demo.shareDataDaily.ShareDataDaily;
+import com.example.demo.shareDataWeekly.ShareDataWeekly;
+import com.example.demo.shareItem.ShareItem;
 
 class ShareObjectMapperTest {
 
@@ -46,7 +44,7 @@ class ShareObjectMapperTest {
     void testShareItemObjectMapper() {
         String mockDataShareItem = getJson("mock-api-call-response-share-item.json");
         ShareItem actual = ShareObjectMapper.shareItemObjectMapper(mockDataShareItem);
-        assertEquals(actual.getPrice().toString(), "121.14");
+        assertEquals(actual.getPrice().toString(), "121.1400");
     }
 
 

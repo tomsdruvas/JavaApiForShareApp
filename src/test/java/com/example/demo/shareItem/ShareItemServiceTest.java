@@ -1,21 +1,22 @@
 package com.example.demo.shareItem;
 
-import com.example.demo.shareDataDaily.ShareDataDailyRepository;
-import com.example.demo.shareDataWeekly.ShareDataWeeklyRepository;
-import com.example.demo.utils.CurrencyEnum;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.Mockito.doReturn;
+import static org.mockito.Mockito.verify;
+
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.time.LocalDateTime;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 
-
-import java.sql.Date;
-import java.time.LocalDateTime;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.Mockito.doReturn;
-import static org.mockito.Mockito.verify;
+import com.example.demo.shareDataDaily.ShareDataDailyRepository;
+import com.example.demo.shareDataWeekly.ShareDataWeeklyRepository;
+import com.example.demo.utils.CurrencyEnum;
 
 @ExtendWith(MockitoExtension.class)
 class ShareItemServiceTest {
@@ -32,7 +33,7 @@ class ShareItemServiceTest {
     @BeforeEach
     void setUp() {
         underTest = new ShareItemService(shareItemRepository, shareDataDailyRepository, shareDataWeeklyRepository);
-        shareItem = new ShareItem("Amazon","AMZN", 30.00, CurrencyEnum.USD, Date.valueOf("2022-02-20"), LocalDateTime.now(), true);
+        shareItem = new ShareItem("Amazon","AMZN", new BigDecimal("13.00"), CurrencyEnum.USD, Date.valueOf("2022-02-20"), LocalDateTime.now(), true);
         shareItemRepository.save(shareItem);
 
     }
@@ -46,7 +47,7 @@ class ShareItemServiceTest {
 
     @Test
     void canGetShareItemFromService() {
-        ShareItem shareItemEntity = new ShareItem("Amazon","AMZN", 30.00, CurrencyEnum.USD, Date.valueOf("2022-02-20"), LocalDateTime.now(), true);
+        ShareItem shareItemEntity = new ShareItem("Amazon","AMZN", new BigDecimal("10.00"), CurrencyEnum.USD, Date.valueOf("2022-02-20"), LocalDateTime.now(), true);
 
         doReturn(shareItemEntity).when(shareItemRepository).findShareItemBySymbol("AMZN");
 

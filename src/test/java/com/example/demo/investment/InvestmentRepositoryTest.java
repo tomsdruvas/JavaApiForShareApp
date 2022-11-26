@@ -1,5 +1,16 @@
 package com.example.demo.investment;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.math.BigDecimal;
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.util.List;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
+
 import com.example.demo.investor.Investor;
 import com.example.demo.investor.InvestorRepository;
 import com.example.demo.portfolio.Portfolio;
@@ -7,15 +18,6 @@ import com.example.demo.portfolio.PortfolioRepository;
 import com.example.demo.shareItem.ShareItem;
 import com.example.demo.shareItem.ShareItemRepository;
 import com.example.demo.utils.CurrencyEnum;
-import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
-
-import java.sql.Date;
-import java.time.LocalDateTime;
-import java.util.List;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 @DataJpaTest
 class InvestmentRepositoryTest {
@@ -34,7 +36,7 @@ class InvestmentRepositoryTest {
 
     @Test
     void shouldBeAbleToCreateAnInvestment(){
-        ShareItem shareItem = new ShareItem("Amazon", "AMZN", 10.00, CurrencyEnum.USD, Date.valueOf("2022-08-02"), LocalDateTime.now(), true);
+        ShareItem shareItem = new ShareItem("Amazon", "AMZN", new BigDecimal("10.00"), CurrencyEnum.USD, Date.valueOf("2022-08-02"), LocalDateTime.now(), true);
         shareItemRepository.save(shareItem);
 
         Investor investor = new Investor("Jack", "ir@financialshop.com");
