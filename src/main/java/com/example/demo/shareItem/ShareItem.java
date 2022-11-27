@@ -57,7 +57,7 @@ public class ShareItem {
     @Column(nullable = false, unique = true)
     @NonNull
     private String symbol;
-    @Column(nullable = false)
+    @Column(nullable = false, columnDefinition="Decimal(10,3) default '100.000'")
     @NonNull
     private BigDecimal price;
 
