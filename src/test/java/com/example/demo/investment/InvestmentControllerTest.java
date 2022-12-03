@@ -2,6 +2,7 @@ package com.example.demo.investment;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasSize;
+import static org.springframework.security.test.web.servlet.setup.SecurityMockMvcConfigurers.springSecurity;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
@@ -23,6 +24,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import org.springframework.test.web.servlet.setup.MockMvcBuilders;
+import org.springframework.web.context.WebApplicationContext;
 
 import com.example.demo.investor.Investor;
 import com.example.demo.investor.InvestorRepository;
@@ -34,7 +37,7 @@ import com.example.demo.utils.CurrencyEnum;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(addFilters = false)
 class InvestmentControllerTest {
 
     @Autowired
@@ -66,9 +69,6 @@ class InvestmentControllerTest {
     private PortfolioRepository portfolioRepository;
     private Portfolio portfolio;
     private Portfolio portfolio2;
-
-
-
 
 
     @BeforeEach

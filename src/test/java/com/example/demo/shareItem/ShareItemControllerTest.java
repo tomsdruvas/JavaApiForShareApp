@@ -22,7 +22,7 @@ import com.example.demo.utils.CurrencyEnum;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @SpringBootTest
-@AutoConfigureMockMvc
+@AutoConfigureMockMvc(addFilters = false)
 class ShareItemControllerTest {
     @Autowired
     private MockMvc mockMvc;
