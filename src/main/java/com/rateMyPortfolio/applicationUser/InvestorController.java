@@ -1,8 +1,9 @@
-package com.rateMyPortfolio.investor;
+package com.rateMyPortfolio.applicationUser;
 
 import java.util.List;
 
 import javax.persistence.EntityNotFoundException;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -18,8 +19,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-import javax.validation.Valid;
-
 @RestController
 @RequestMapping(path = "api/investors")
 public class InvestorController {
@@ -33,12 +32,12 @@ public class InvestorController {
     }
 
     @GetMapping
-    public ResponseEntity<List<Investor>> getAll() {
+    public ResponseEntity<List<ApplicationUser>> getAll() {
         return new ResponseEntity<>(investorService.getAll(), HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public Investor getInvestorById(@PathVariable(value = "id") Long investorId){
+    public ApplicationUser getInvestorById(@PathVariable(value = "id") Long investorId){
         try {
             return investorService.getById(investorId);
         }
@@ -49,17 +48,17 @@ public class InvestorController {
     }
 
     @PostMapping()
-    public Investor newInvestor(@Valid @RequestBody Investor newInvestor) {
-        return investorService.save(newInvestor);
+    public ApplicationUser newInvestor(@Valid @RequestBody ApplicationUser newApplicationUser) {
+        return investorService.save(newApplicationUser);
     }
 
 
     @PutMapping("/{id}")
     @ResponseStatus(code = HttpStatus.OK)
-    public ResponseEntity<Investor> updateInvestor(@PathVariable long id, @RequestBody Investor updatedInvestorDetails){
-        Investor updateInvestor = investorService.updateById(id, updatedInvestorDetails);
+    public ResponseEntity<ApplicationUser> updateInvestor(@PathVariable long id, @RequestBody ApplicationUser updatedApplicationUserDetails){
+        ApplicationUser updateApplicationUser = investorService.updateById(id, updatedApplicationUserDetails);
 
-        return ResponseEntity.ok(updateInvestor);
+        return ResponseEntity.ok(updateApplicationUser);
 
     }
 

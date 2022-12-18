@@ -25,8 +25,8 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import com.rateMyPortfolio.investor.Investor;
-import com.rateMyPortfolio.investor.InvestorRepository;
+import com.rateMyPortfolio.applicationUser.ApplicationUser;
+import com.rateMyPortfolio.applicationUser.InvestorRepository;
 import com.rateMyPortfolio.portfolio.Portfolio;
 import com.rateMyPortfolio.portfolio.PortfolioRepository;
 import com.rateMyPortfolio.shareItem.ShareItem;
@@ -54,8 +54,8 @@ class InvestmentControllerTest {
 
     @Autowired
     private InvestorRepository investorRepository;
-    private Investor investor;
-    private Investor investor2;
+    private ApplicationUser applicationUser;
+    private ApplicationUser applicationUser2;
 
     @Autowired
     private ShareItemRepository shareItemRepository;
@@ -71,10 +71,10 @@ class InvestmentControllerTest {
 
     @BeforeEach
     void setUp() {
-        investor = new Investor("Carl","Carl@mail.com");
-        investor2 = new Investor("Vincent","Vincent@mail.com");
-        Long investorId = investorRepository.save(investor).getId();
-        Long investorId2 = investorRepository.save(investor2).getId();
+        applicationUser = new ApplicationUser("Carl","Carl@mail.com");
+        applicationUser2 = new ApplicationUser("Vincent","Vincent@mail.com");
+        Long investorId = investorRepository.save(applicationUser).getId();
+        Long investorId2 = investorRepository.save(applicationUser2).getId();
 
         shareItem = new ShareItem("Amazon", "AMZN", new BigDecimal("10.00"), CurrencyEnum.USD, Date.valueOf("2022-08-02"), LocalDateTime.now(), true);
         shareItem2 = new ShareItem("Microsoft", "MSFT", new BigDecimal("30.00"), CurrencyEnum.USD, Date.valueOf("2022-08-02"), LocalDateTime.now(), true);

@@ -2,8 +2,8 @@ package com.rateMyPortfolio.commentVote;
 
 import com.rateMyPortfolio.comment.Comment;
 import com.rateMyPortfolio.comment.CommentRepository;
-import com.rateMyPortfolio.investor.Investor;
-import com.rateMyPortfolio.investor.InvestorRepository;
+import com.rateMyPortfolio.applicationUser.ApplicationUser;
+import com.rateMyPortfolio.applicationUser.InvestorRepository;
 import com.rateMyPortfolio.portfolio.Portfolio;
 import com.rateMyPortfolio.portfolio.PortfolioRepository;
 import com.rateMyPortfolio.utils.VoteEnum;
@@ -37,16 +37,16 @@ class CommentVoteRepositoryTest {
     @Test
     void shouldBeAbleToCreateACommentVote_success(){
 
-        Investor investor = new Investor("Jack", "ir@financialshop.com");
-        investorRepository.save(investor);
+        ApplicationUser applicationUser = new ApplicationUser("Jack", "ir@financialshop.com");
+        investorRepository.save(applicationUser);
 
-        Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), investor, true);
+        Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), applicationUser, true);
         portfolioRepository.save(portfolio);
 
-        Comment comment = new Comment(investor, portfolio, Date.valueOf("2022-08-02"), "This portfolio is looking nice");
+        Comment comment = new Comment(applicationUser, portfolio, Date.valueOf("2022-08-02"), "This portfolio is looking nice");
         commentRepository.save(comment);
 
-        CommentVote commentVote = new CommentVote(investor, comment, VoteEnum.UP);
+        CommentVote commentVote = new CommentVote(applicationUser, comment, VoteEnum.UP);
         underTest.save(commentVote);
 
         List<CommentVote> commentVoteList = underTest.findAll();
@@ -59,16 +59,16 @@ class CommentVoteRepositoryTest {
     @Test
     void shouldBeAbleToUpdateACommentVote_success(){
 
-        Investor investor = new Investor("Jack", "ir@financialshop.com");
-        investorRepository.save(investor);
+        ApplicationUser applicationUser = new ApplicationUser("Jack", "ir@financialshop.com");
+        investorRepository.save(applicationUser);
 
-        Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), investor, true);
+        Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), applicationUser, true);
         portfolioRepository.save(portfolio);
 
-        Comment comment = new Comment(investor, portfolio, Date.valueOf("2022-08-02"), "This portfolio is looking nice");
+        Comment comment = new Comment(applicationUser, portfolio, Date.valueOf("2022-08-02"), "This portfolio is looking nice");
         commentRepository.save(comment);
 
-        CommentVote commentVote = new CommentVote(investor, comment, VoteEnum.UP);
+        CommentVote commentVote = new CommentVote(applicationUser, comment, VoteEnum.UP);
         underTest.save(commentVote);
 
         List<CommentVote> commentVoteList = underTest.findAll();
@@ -87,19 +87,19 @@ class CommentVoteRepositoryTest {
     @Test
     void sameUserShouldNotBeAbleToVoteTwiceOnTheSameComment_Exception  (){
 
-        Investor investor = new Investor("Jack", "ir@financialshop.com");
-        investorRepository.save(investor);
+        ApplicationUser applicationUser = new ApplicationUser("Jack", "ir@financialshop.com");
+        investorRepository.save(applicationUser);
 
-        Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), investor, true);
+        Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), applicationUser, true);
         portfolioRepository.save(portfolio);
 
-        Comment comment = new Comment(investor, portfolio, Date.valueOf("2022-08-02"), "This portfolio is looking nice");
+        Comment comment = new Comment(applicationUser, portfolio, Date.valueOf("2022-08-02"), "This portfolio is looking nice");
         commentRepository.save(comment);
 
-        CommentVote commentVoteUp = new CommentVote(investor.getId(), comment.getId(), VoteEnum.UP);
+        CommentVote commentVoteUp = new CommentVote(applicationUser.getId(), comment.getId(), VoteEnum.UP);
         underTest.save(commentVoteUp);
 
-        CommentVote commentVoteDown = new CommentVote(investor.getId(), comment.getId(), VoteEnum.DOWN);
+        CommentVote commentVoteDown = new CommentVote(applicationUser.getId(), comment.getId(), VoteEnum.DOWN);
         assertThrows(DataIntegrityViolationException.class, () -> underTest.saveAndFlush(commentVoteDown));
 
     }
@@ -107,16 +107,16 @@ class CommentVoteRepositoryTest {
     @Test
     void shouldBeAbleToDeleteACommentVoteById_success(){
 
-        Investor investor = new Investor("Jack", "ir@financialshop.com");
-        investorRepository.save(investor);
+        ApplicationUser applicationUser = new ApplicationUser("Jack", "ir@financialshop.com");
+        investorRepository.save(applicationUser);
 
-        Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), investor, true);
+        Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), applicationUser, true);
         portfolioRepository.save(portfolio);
 
-        Comment comment = new Comment(investor, portfolio, Date.valueOf("2022-08-02"), "This portfolio is looking nice");
+        Comment comment = new Comment(applicationUser, portfolio, Date.valueOf("2022-08-02"), "This portfolio is looking nice");
         commentRepository.save(comment);
 
-        CommentVote commentVote = new CommentVote(investor, comment, VoteEnum.UP);
+        CommentVote commentVote = new CommentVote(applicationUser, comment, VoteEnum.UP);
         underTest.save(commentVote);
 
         List<CommentVote> commentVoteList = underTest.findAll();

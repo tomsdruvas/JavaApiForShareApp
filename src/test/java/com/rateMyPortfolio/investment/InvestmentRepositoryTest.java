@@ -11,8 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 
-import com.rateMyPortfolio.investor.Investor;
-import com.rateMyPortfolio.investor.InvestorRepository;
+import com.rateMyPortfolio.applicationUser.ApplicationUser;
+import com.rateMyPortfolio.applicationUser.InvestorRepository;
 import com.rateMyPortfolio.portfolio.Portfolio;
 import com.rateMyPortfolio.portfolio.PortfolioRepository;
 import com.rateMyPortfolio.shareItem.ShareItem;
@@ -39,10 +39,10 @@ class InvestmentRepositoryTest {
         ShareItem shareItem = new ShareItem("Amazon", "AMZN", new BigDecimal("10.00"), CurrencyEnum.USD, Date.valueOf("2022-08-02"), LocalDateTime.now(), true);
         shareItemRepository.save(shareItem);
 
-        Investor investor = new Investor("Jack", "ir@financialshop.com");
-        investorRepository.save(investor);
+        ApplicationUser applicationUser = new ApplicationUser("Jack", "ir@financialshop.com");
+        investorRepository.save(applicationUser);
 
-        Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), investor, true);
+        Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), applicationUser, true);
         portfolioRepository.save(portfolio);
 
         Investment investment = new Investment(shareItem, 3.00, 10.00, Date.valueOf("2022-08-02" ), portfolio);

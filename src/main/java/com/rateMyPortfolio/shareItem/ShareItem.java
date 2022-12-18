@@ -16,11 +16,11 @@ import javax.persistence.OrderBy;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.rateMyPortfolio.shareDataDaily.ShareDataDaily;
 import com.rateMyPortfolio.shareDataWeekly.ShareDataWeekly;
 import com.rateMyPortfolio.utils.CurrencyEnum;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

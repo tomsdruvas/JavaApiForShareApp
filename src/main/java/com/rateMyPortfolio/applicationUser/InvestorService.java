@@ -1,10 +1,11 @@
-package com.rateMyPortfolio.investor;
+package com.rateMyPortfolio.applicationUser;
+
+import java.util.List;
+
+import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import javax.persistence.EntityNotFoundException;
-import java.util.List;
 
 @Service
 public class InvestorService {
@@ -18,11 +19,11 @@ public class InvestorService {
     }
 
 
-    public List<Investor> getAll() {
+    public List<ApplicationUser> getAll() {
         return investorRepository.findAll();
     }
 
-    public Investor getById(long investorId) throws EntityNotFoundException {
+    public ApplicationUser getById(long investorId) throws EntityNotFoundException {
 
         boolean exists = investorRepository.existsById(investorId);
         if (!exists) {
@@ -32,8 +33,8 @@ public class InvestorService {
         return investorRepository.findInvestorById(investorId);
     }
 
-    public Investor save(Investor newInvestor) {
-        return investorRepository.save(newInvestor);
+    public ApplicationUser save(ApplicationUser newApplicationUser) {
+        return investorRepository.save(newApplicationUser);
     }
 
     public void removeInvestorByID(Long investorId) throws EntityNotFoundException {
@@ -45,16 +46,16 @@ public class InvestorService {
     }
 
 
-    public Investor updateById(long id, Investor updatedInvestorDetails) {
+    public ApplicationUser updateById(long id, ApplicationUser updatedApplicationUserDetails) {
         boolean exists = investorRepository.existsById(id);
         if (!exists) {
             throw new EntityNotFoundException("Investor with " + id + " doesn't exist");
         }
-        Investor investor = investorRepository.findInvestorById(id);
+        ApplicationUser applicationUser = investorRepository.findInvestorById(id);
 
-        investor.setName(updatedInvestorDetails.getName());
-        investor.setEmail(updatedInvestorDetails.getEmail());
+        applicationUser.setName(updatedApplicationUserDetails.getName());
+        applicationUser.setEmail(updatedApplicationUserDetails.getEmail());
 
-        return investorRepository.save(investor);
+        return investorRepository.save(applicationUser);
     }
 }

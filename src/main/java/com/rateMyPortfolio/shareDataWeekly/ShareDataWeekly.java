@@ -16,9 +16,9 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 
-import com.rateMyPortfolio.shareItem.ShareItem;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.rateMyPortfolio.shareItem.ShareItem;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

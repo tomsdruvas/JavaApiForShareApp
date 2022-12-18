@@ -1,15 +1,15 @@
 package com.rateMyPortfolio.shareItem;
 
-import com.rateMyPortfolio.shareDataDaily.ShareDataDailyRepository;
-import com.rateMyPortfolio.shareDataWeekly.ShareDataWeeklyRepository;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import java.sql.Date;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.rateMyPortfolio.shareDataDaily.ShareDataDailyRepository;
+import com.rateMyPortfolio.shareDataWeekly.ShareDataWeeklyRepository;
 
 @Service
 public class ShareItemService {
@@ -39,9 +39,11 @@ public class ShareItemService {
         newShareItem.setOutstandingTask(true);
         newShareItem.setUpdatedAt(Date.valueOf(LocalDate.now()));
         newShareItem.setAddedAt(LocalDateTime.now());
+        ShareItem existingShareItem = shareItemRepository.findShareItemBySymbol(newShareItem.getSymbol());
+        if (existingShareItem != null) {
+            return existingShareItem;
+        }
         return shareItemRepository.save(newShareItem);
     }
-
-
 
 }

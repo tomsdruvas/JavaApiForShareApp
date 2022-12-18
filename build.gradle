@@ -14,7 +14,11 @@ repositories {
     maven {
         url = uri('https://repo.maven.apache.org/maven2/')
     }
+    maven {
+        url "https://repo.spring.io/release"
+    }
     mavenCentral()
+    google()
 }
 
 dependencies {
@@ -31,14 +35,14 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-validation:2.7.3'
     implementation 'javax.validation:validation-api:2.0.1.Final'
     implementation 'org.eclipse.jetty:jetty-server:11.0.11'
-
+    implementation('com.google.guava:guava:30.0-android')
     implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
     implementation 'org.springframework.boot:spring-boot-starter-web'
     implementation 'org.springframework.boot:spring-boot-starter-security'
     implementation 'org.springframework.security:spring-security-test'
     testImplementation('org.springframework.boot:spring-boot-starter-test')
 
-    runtimeOnly 'org.postgresql:postgresql:42.5.0'
+    runtimeOnly 'org.postgresql:postgresql:42.5.1'
     testImplementation "com.github.tomakehurst:wiremock-jre8-standalone:2.33.2"
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.7.3'
     testImplementation 'com.h2database:h2:2.1.214'

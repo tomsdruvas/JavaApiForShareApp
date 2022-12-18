@@ -1,16 +1,31 @@
 package com.rateMyPortfolio.comment;
 
-import com.rateMyPortfolio.commentVote.CommentVote;
-import com.rateMyPortfolio.investor.Investor;
-import com.rateMyPortfolio.portfolio.Portfolio;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import lombok.*;
-
-import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.rateMyPortfolio.applicationUser.ApplicationUser;
+import com.rateMyPortfolio.commentVote.CommentVote;
+import com.rateMyPortfolio.portfolio.Portfolio;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table
@@ -40,7 +55,7 @@ public class Comment {
     @ManyToOne
     @JoinColumn(name = "investor_id", insertable = false, updatable = false)
     @NonNull
-    private Investor investor;
+    private ApplicationUser applicationUser;
 
     @Column(name = "portfolio_id")
     private Long portfolioId;

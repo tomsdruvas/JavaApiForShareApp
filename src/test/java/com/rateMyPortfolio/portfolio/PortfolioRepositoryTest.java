@@ -1,7 +1,7 @@
 package com.rateMyPortfolio.portfolio;
 
-import com.rateMyPortfolio.investor.Investor;
-import com.rateMyPortfolio.investor.InvestorRepository;
+import com.rateMyPortfolio.applicationUser.ApplicationUser;
+import com.rateMyPortfolio.applicationUser.InvestorRepository;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -25,16 +25,16 @@ class PortfolioRepositoryTest {
     private InvestorRepository investorRepository;
 
 
-    private Investor investor;
+    private ApplicationUser applicationUser;
     private Portfolio portfolio;
 
 
 
     @BeforeEach
     void init(){
-        investor = new Investor("Jack", "ir@financialshop.com");
-        portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), investor, true);
-        investorRepository.save(investor);
+        applicationUser = new ApplicationUser("Jack", "ir@financialshop.com");
+        portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), applicationUser, true);
+        investorRepository.save(applicationUser);
         underTest.save(portfolio);
 
     }
@@ -54,12 +54,12 @@ class PortfolioRepositoryTest {
     @Test
     void shouldBeAbleToUpdatePortfolioById(){
 
-        Portfolio updatedDetails = new Portfolio("Tech stocks updated", Date.valueOf("2022-08-03"), investor, false);
+        Portfolio updatedDetails = new Portfolio("Tech stocks updated", Date.valueOf("2022-08-03"), applicationUser, false);
 
         Portfolio portfolioFromDB = underTest.findPortfolioById((portfolio.getId()));
 
         portfolioFromDB.setName(updatedDetails.getName());
-        portfolioFromDB.setInvestor(updatedDetails.getInvestor());
+        portfolioFromDB.setApplicationUser(updatedDetails.getApplicationUser());
         portfolioFromDB.setCreatedDate(updatedDetails.getCreatedDate());
         portfolioFromDB.setIsPublic(updatedDetails.getIsPublic());
 

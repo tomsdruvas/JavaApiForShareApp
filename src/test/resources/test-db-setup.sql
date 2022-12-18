@@ -1,5 +1,5 @@
-INSERT INTO investor (id, email, name) VALUES (1, 'ir@financialshop.com', 'Jack');
-INSERT INTO investor (id, email, name) VALUES (2, 'noreply@financialshop.com', 'John');
+INSERT INTO application_user (id, email, name) VALUES (1, 'ir@financialshop.com', 'Jack');
+INSERT INTO application_user (id, email, name) VALUES (2, 'noreply@financialshop.com', 'John');
 
 
 INSERT INTO portfolio (id, created_date, is_public, name, investor_id) VALUES (1, current_date, true, 'Tech stocks', 1);

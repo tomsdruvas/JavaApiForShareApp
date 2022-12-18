@@ -1,7 +1,7 @@
 package com.rateMyPortfolio.portfolioVote;
 
-import com.rateMyPortfolio.investor.Investor;
-import com.rateMyPortfolio.investor.InvestorRepository;
+import com.rateMyPortfolio.applicationUser.ApplicationUser;
+import com.rateMyPortfolio.applicationUser.InvestorRepository;
 import com.rateMyPortfolio.portfolio.Portfolio;
 import com.rateMyPortfolio.portfolio.PortfolioRepository;
 import com.rateMyPortfolio.utils.VoteEnum;
@@ -30,13 +30,13 @@ class PortfolioVoteRepositoryTest {
 
     @Test
     void shouldBeAbleToCreateAPortfolioVote_success(){
-        Investor investor = new Investor("Jack", "ir@financialshop.com");
-        investorRepository.save(investor);
+        ApplicationUser applicationUser = new ApplicationUser("Jack", "ir@financialshop.com");
+        investorRepository.save(applicationUser);
 
-        Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), investor, true);
+        Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), applicationUser, true);
         portfolioRepository.save(portfolio);
 
-        PortfolioVote portfolioVote = new PortfolioVote(investor.getId(), portfolio.getId(), VoteEnum.UP);
+        PortfolioVote portfolioVote = new PortfolioVote(applicationUser.getId(), portfolio.getId(), VoteEnum.UP);
         underTest.save(portfolioVote);
 
         List<PortfolioVote> portfolioVoteList = underTest.findAll();
@@ -49,14 +49,14 @@ class PortfolioVoteRepositoryTest {
     @Test
     void shouldBeAbleToUpdateAPortfolioVote_success(){
 
-        Investor investor = new Investor("Jack", "ir@financialshop.com");
-        investorRepository.save(investor);
+        ApplicationUser applicationUser = new ApplicationUser("Jack", "ir@financialshop.com");
+        investorRepository.save(applicationUser);
 
-        Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), investor, true);
+        Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), applicationUser, true);
         portfolioRepository.save(portfolio);
 
 
-        PortfolioVote portfolioVote = new PortfolioVote(investor.getId(), portfolio.getId(), VoteEnum.UP);
+        PortfolioVote portfolioVote = new PortfolioVote(applicationUser.getId(), portfolio.getId(), VoteEnum.UP);
         underTest.save(portfolioVote);
 
         List<PortfolioVote> portfolioVoteList = underTest.findAll();
@@ -72,14 +72,14 @@ class PortfolioVoteRepositoryTest {
 
     @Test
     void findPortfolioVoteById_success() {
-        Investor investor = new Investor("Jack", "ir@financialshop.com");
-        investorRepository.save(investor);
+        ApplicationUser applicationUser = new ApplicationUser("Jack", "ir@financialshop.com");
+        investorRepository.save(applicationUser);
 
-        Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), investor, true);
+        Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), applicationUser, true);
         portfolioRepository.save(portfolio);
 
 
-        PortfolioVote portfolioVote = new PortfolioVote(investor.getId(), portfolio.getId(), VoteEnum.UP);
+        PortfolioVote portfolioVote = new PortfolioVote(applicationUser.getId(), portfolio.getId(), VoteEnum.UP);
         underTest.save(portfolioVote);
 
         List<PortfolioVote> updatedPortfolioVoteList = underTest.findAll();
@@ -90,16 +90,16 @@ class PortfolioVoteRepositoryTest {
     @Test
     void sameUserShouldNotBeAbleToVoteTwiceOnTheSamePortfolio_Exception  (){
 
-        Investor investor = new Investor("Jack", "ir@financialshop.com");
-        investorRepository.save(investor);
+        ApplicationUser applicationUser = new ApplicationUser("Jack", "ir@financialshop.com");
+        investorRepository.save(applicationUser);
 
-        Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), investor, true);
+        Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), applicationUser, true);
         portfolioRepository.save(portfolio);
 
-        PortfolioVote portfolioVote = new PortfolioVote(investor.getId(), portfolio.getId(), VoteEnum.UP);
+        PortfolioVote portfolioVote = new PortfolioVote(applicationUser.getId(), portfolio.getId(), VoteEnum.UP);
         underTest.save(portfolioVote);
 
-        PortfolioVote portfolioVoteDown = new PortfolioVote(investor.getId(), portfolio.getId(), VoteEnum.DOWN);
+        PortfolioVote portfolioVoteDown = new PortfolioVote(applicationUser.getId(), portfolio.getId(), VoteEnum.DOWN);
         assertThrows(DataIntegrityViolationException.class, () -> underTest.saveAndFlush(portfolioVoteDown));
 
     }
@@ -107,13 +107,13 @@ class PortfolioVoteRepositoryTest {
     @Test
     void shouldBeAbleToDeleteAPortfolioVoteById_success(){
 
-        Investor investor = new Investor("Jack", "ir@financialshop.com");
-        investorRepository.save(investor);
+        ApplicationUser applicationUser = new ApplicationUser("Jack", "ir@financialshop.com");
+        investorRepository.save(applicationUser);
 
-        Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), investor, true);
+        Portfolio portfolio = new Portfolio("Tech Stocks", Date.valueOf("2022-08-02"), applicationUser, true);
         portfolioRepository.save(portfolio);
 
-        PortfolioVote portfolioVote = new PortfolioVote(investor.getId(), portfolio.getId(), VoteEnum.UP);
+        PortfolioVote portfolioVote = new PortfolioVote(applicationUser.getId(), portfolio.getId(), VoteEnum.UP);
         underTest.save(portfolioVote);
 
         List<PortfolioVote> portfolioVoteList = underTest.findAll();

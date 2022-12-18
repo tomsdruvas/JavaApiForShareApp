@@ -1,5 +1,12 @@
 package com.rateMyPortfolio.scheduledCalls;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.client.WebClient;
+
 import com.rateMyPortfolio.shareDataDaily.ShareDataDaily;
 import com.rateMyPortfolio.shareDataDaily.ShareDataDailyRepository;
 import com.rateMyPortfolio.shareDataWeekly.ShareDataWeekly;
@@ -10,13 +17,6 @@ import com.rateMyPortfolio.utils.ShareObjectMapper;
 import com.rateMyPortfolio.webClient.WebClientToGetAPI;
 import com.rateMyPortfolio.webClient.WebClientToGetShareItemProperties;
 import com.rateMyPortfolio.webClient.WebClientUrlEnum;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Service;
-import org.springframework.web.reactive.function.client.WebClient;
-
-import java.util.List;
 
 @Service
 public class GetPrices {

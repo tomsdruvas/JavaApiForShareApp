@@ -13,15 +13,20 @@ import java.time.LocalDateTime;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.test.context.TestSecurityContextHolder;
+import org.springframework.security.test.context.support.WithMockUser;
+import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import com.rateMyPortfolio.utils.CurrencyEnum;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@SpringBootTest
+@SpringBootTest()
 @AutoConfigureMockMvc(addFilters = false)
 class ShareItemControllerTest {
     @Autowired
@@ -42,8 +47,6 @@ class ShareItemControllerTest {
 
     }
 
-
-
     @AfterEach
     void tearDown(){
         shareItemRepository.deleteAll();
@@ -56,9 +59,10 @@ class ShareItemControllerTest {
                         .contentType("application/json"))
                 .andDo(print())
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$", hasSize(1)));
+                .andExpect(jsonPath("$", hasSize(3)));
     }
 
+    @WithMockUser(roles = "ADMIN")
     @Test
     void canGetShareItemBySymbolPathVariable() throws Exception {
 

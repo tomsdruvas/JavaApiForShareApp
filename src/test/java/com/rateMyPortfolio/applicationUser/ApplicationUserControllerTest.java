@@ -1,4 +1,4 @@
-package com.rateMyPortfolio.investor;
+package com.rateMyPortfolio.applicationUser;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.AfterEach;
@@ -23,7 +23,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc(addFilters = false)
-class InvestorControllerTest {
+class ApplicationUserControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
@@ -40,11 +40,11 @@ class InvestorControllerTest {
 
     @Test
     void shouldBeAbleToGetAListOfInvestors() throws Exception {
-        Investor investor = new Investor("Carl","Carl@mail.com");
-        Investor investor2 = new Investor("Vincent","Vincent@mail.com");
+        ApplicationUser applicationUser = new ApplicationUser("Carl","Carl@mail.com");
+        ApplicationUser applicationUser2 = new ApplicationUser("Vincent","Vincent@mail.com");
 
-        investorRepository.save(investor);
-        investorRepository.save(investor2);
+        investorRepository.save(applicationUser);
+        investorRepository.save(applicationUser2);
 
         mockMvc.perform(get("/api/investors/")
                         .contentType("application/json"))
@@ -57,21 +57,21 @@ class InvestorControllerTest {
 
     @Test
     void addingInvestorWorksThroughTheController() throws Exception {
-        Investor investor = new Investor("Jack","Jack@mail.com");
+        ApplicationUser applicationUser = new ApplicationUser("Jack","Jack@mail.com");
 
         mockMvc.perform(post("/api/investors")
                         .contentType("application/json")
-                        .content(objectMapper.writeValueAsString(investor)))
+                        .content(objectMapper.writeValueAsString(applicationUser)))
                         .andExpect(status().isOk());
 
-        Investor investorEntity = investorRepository.findByName("Jack");
-        assertThat(investorEntity.getEmail()).isEqualTo("Jack@mail.com");
+        ApplicationUser applicationUserEntity = investorRepository.findByName("Jack");
+        assertThat(applicationUserEntity.getEmail()).isEqualTo("Jack@mail.com");
     }
 
     @Test
     void shouldBeAbleToGetInvestorById() throws Exception {
-        Investor investor = new Investor("John","John@mail.com");
-        String investorEntityId = investorRepository.save(investor).getId().toString();
+        ApplicationUser applicationUser = new ApplicationUser("John","John@mail.com");
+        String investorEntityId = investorRepository.save(applicationUser).getId().toString();
 
         mockMvc.perform(get("/api/investors/" + investorEntityId)
                         .contentType("application/json"))
@@ -89,39 +89,39 @@ class InvestorControllerTest {
 
     @Test
     void shouldBeAbleToDeleteInvestorById() throws Exception {
-        Investor investor = new Investor("John","John@mail.com");
-        Investor investor1 = new Investor("Jack","Jack@mail.com");
+        ApplicationUser applicationUser = new ApplicationUser("John","John@mail.com");
+        ApplicationUser applicationUser1 = new ApplicationUser("Jack","Jack@mail.com");
 
-        String investorEntityId = investorRepository.save(investor).getId().toString();
-        investorRepository.save(investor1);
+        String investorEntityId = investorRepository.save(applicationUser).getId().toString();
+        investorRepository.save(applicationUser1);
 
         mockMvc.perform(MockMvcRequestBuilders.delete("/api/investors/" + investorEntityId)
                         .contentType("application/json"))
                 .andExpect(status().isOk());
 
-        List<Investor> investorList = investorRepository.findAll();
-        assertThat(investorList.size()).isEqualTo(1);
-        assertThat(investorList.get(0).getName()).isEqualTo("Jack");
+        List<ApplicationUser> applicationUserList = investorRepository.findAll();
+        assertThat(applicationUserList.size()).isEqualTo(1);
+        assertThat(applicationUserList.get(0).getName()).isEqualTo("Jack");
 
     }
 
     @Test
     void updateInvestorById_success() throws Exception {
-        Investor investor = new Investor("John","John@mail.com");
-        Investor updateInvestor = new Investor("Updated","Jack@mail.com");
+        ApplicationUser applicationUser = new ApplicationUser("John","John@mail.com");
+        ApplicationUser updateApplicationUser = new ApplicationUser("Updated","Jack@mail.com");
 
-        String investorEntityId = investorRepository.save(investor).getId().toString();
+        String investorEntityId = investorRepository.save(applicationUser).getId().toString();
 
-        String updateInvestorJson = objectMapper.writeValueAsString(updateInvestor);
+        String updateInvestorJson = objectMapper.writeValueAsString(updateApplicationUser);
 
         mockMvc.perform(put(("/api/investors/" + investorEntityId))
                 .content(updateInvestorJson)
                 .contentType("application/json"))
                 .andExpect(status().isOk());
 
-        List<Investor> investorList = investorRepository.findAll();
-        assertThat(investorList.size()).isEqualTo(1);
-        assertThat(investorList.get(0).getName()).isEqualTo("Updated");
+        List<ApplicationUser> applicationUserList = investorRepository.findAll();
+        assertThat(applicationUserList.size()).isEqualTo(1);
+        assertThat(applicationUserList.get(0).getName()).isEqualTo("Updated");
 
     }
 

@@ -4,8 +4,8 @@ import com.rateMyPortfolio.comment.Comment;
 import com.rateMyPortfolio.comment.CommentRepository;
 
 
-import com.rateMyPortfolio.investor.Investor;
-import com.rateMyPortfolio.investor.InvestorRepository;
+import com.rateMyPortfolio.applicationUser.ApplicationUser;
+import com.rateMyPortfolio.applicationUser.InvestorRepository;
 import com.rateMyPortfolio.portfolio.Portfolio;
 import com.rateMyPortfolio.portfolio.PortfolioRepository;
 
@@ -48,8 +48,8 @@ class CommentVoteControllerTest {
 
     @Autowired
     private InvestorRepository investorRepository;
-    private Investor investor;
-    private Investor investor2;
+    private ApplicationUser applicationUser;
+    private ApplicationUser applicationUser2;
 
     @Autowired
     private CommentRepository commentRepository;
@@ -65,10 +65,10 @@ class CommentVoteControllerTest {
 
     @BeforeEach
     void setUp() {
-        investor = new Investor("Carl","Carl@mail.com");
-        investor2 = new Investor("Vincent","Vincent@mail.com");
-        Long investorId = investorRepository.save(investor).getId();
-        Long investorId2 = investorRepository.save(investor2).getId();
+        applicationUser = new ApplicationUser("Carl","Carl@mail.com");
+        applicationUser2 = new ApplicationUser("Vincent","Vincent@mail.com");
+        Long investorId = investorRepository.save(applicationUser).getId();
+        Long investorId2 = investorRepository.save(applicationUser2).getId();
 
         portfolio = new Portfolio("Tech stocks updated", Date.valueOf("2022-08-03"), investorId, false);
         portfolio2 = new Portfolio("Food and Beverage", Date.valueOf("2022-08-10"), investorId2, false);

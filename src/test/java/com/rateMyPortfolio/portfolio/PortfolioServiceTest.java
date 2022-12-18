@@ -1,6 +1,6 @@
 package com.rateMyPortfolio.portfolio;
 
-import com.rateMyPortfolio.investor.Investor;
+import com.rateMyPortfolio.applicationUser.ApplicationUser;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,12 +22,12 @@ class PortfolioServiceTest {
 
     private PortfolioService underTest;
 
-    private Investor investor;
+    private ApplicationUser applicationUser;
 
     @BeforeEach
     void setUp() {
         underTest = new PortfolioService(portfolioRepository);
-        investor = new Investor(1L, "Jack", "ir@financialshop.com");
+        applicationUser = new ApplicationUser(1L, "Jack", "ir@financialshop.com");
     }
 
     @AfterEach
@@ -44,7 +44,7 @@ class PortfolioServiceTest {
     @Test
     void shouldBeAbleToGetPortfolioById() {
         Long portfolioId = 1L;
-        Portfolio portfolioForMock = new Portfolio(portfolioId, "Tech stocks updated", Date.valueOf("2022-08-03"), investor, false);
+        Portfolio portfolioForMock = new Portfolio(portfolioId, "Tech stocks updated", Date.valueOf("2022-08-03"), applicationUser, false);
 
         doReturn(portfolioForMock).when(portfolioRepository).findPortfolioById(portfolioId);
         doReturn(true).when(portfolioRepository).existsById(portfolioId);
@@ -59,7 +59,7 @@ class PortfolioServiceTest {
     @Test
     void shouldBeAbleToSaveViaService() {
 
-        Portfolio expected = new Portfolio("Tech stocks updated", Date.valueOf("2022-08-03"), investor, false);
+        Portfolio expected = new Portfolio("Tech stocks updated", Date.valueOf("2022-08-03"), applicationUser, false);
 
         when(portfolioRepository.save(expected))
                     .thenReturn(expected);
@@ -85,10 +85,10 @@ class PortfolioServiceTest {
     @Test
     void updateInvestorById() {
         Long portfolioId = 1L;
-        Portfolio portfolioForMock = new Portfolio(portfolioId,"Tech stocks updated", Date.valueOf("2022-08-03"), investor, false);
+        Portfolio portfolioForMock = new Portfolio(portfolioId,"Tech stocks updated", Date.valueOf("2022-08-03"), applicationUser, false);
 
-        Portfolio updatePortfolio = new Portfolio("Tech stocks updated", Date.valueOf("2022-08-03"), investor, false);
-        Portfolio updatedPortfolio = new Portfolio(portfolioId,"Tech stocks updated", Date.valueOf("2022-08-03"), investor, false);
+        Portfolio updatePortfolio = new Portfolio("Tech stocks updated", Date.valueOf("2022-08-03"), applicationUser, false);
+        Portfolio updatedPortfolio = new Portfolio(portfolioId,"Tech stocks updated", Date.valueOf("2022-08-03"), applicationUser, false);
 
 
         when(portfolioRepository.existsById(1L)).thenReturn(true);

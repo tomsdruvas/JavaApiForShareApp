@@ -1,7 +1,7 @@
 package com.rateMyPortfolio.portfolio;
 
-import com.rateMyPortfolio.investor.Investor;
-import com.rateMyPortfolio.investor.InvestorRepository;
+import com.rateMyPortfolio.applicationUser.ApplicationUser;
+import com.rateMyPortfolio.applicationUser.InvestorRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.junit.jupiter.api.AfterEach;
@@ -40,18 +40,18 @@ class PortfolioControllerTest {
     @Autowired
     private InvestorRepository investorRepository;
 
-    private Investor investor;
-    private Investor investor2;
+    private ApplicationUser applicationUser;
+    private ApplicationUser applicationUser2;
     private Portfolio portfolio;
     private Portfolio portfolio2;
 
 
     @BeforeEach
     void init() {
-        investor = new Investor("Jack", "Jack@mail.com");
-        investor2 = new Investor("John", "John@mail.com");
-        Long id = investorRepository.save(investor).getId();
-        Long id2 = investorRepository.save(investor2).getId();
+        applicationUser = new ApplicationUser("Jack", "Jack@mail.com");
+        applicationUser2 = new ApplicationUser("John", "John@mail.com");
+        Long id = investorRepository.save(applicationUser).getId();
+        Long id2 = investorRepository.save(applicationUser2).getId();
 
 
         portfolio = new Portfolio("Tech stocks updated", Date.valueOf("2022-08-03"), id, false);
@@ -89,7 +89,7 @@ class PortfolioControllerTest {
     @Test
     void newPortfolioTest() throws Exception {
 
-        Portfolio portfolio3 = new Portfolio("Shopping stocks", Date.valueOf("2022-08-10"), investor2.getId(), false);
+        Portfolio portfolio3 = new Portfolio("Shopping stocks", Date.valueOf("2022-08-10"), applicationUser2.getId(), false);
 
         mockMvc.perform(post("/api/portfolio")
                         .contentType("application/json")
@@ -98,7 +98,7 @@ class PortfolioControllerTest {
 
         Portfolio portfolioEntity = portfolioRepository.findPortfolioByName(portfolio3.getName());
         assertThat(portfolioEntity.getIsPublic()).isEqualTo(false);
-        assertThat(portfolioEntity.getInvestor().getName()).isEqualTo("John");
+        assertThat(portfolioEntity.getApplicationUser().getName()).isEqualTo("John");
     }
 
     @Test
@@ -122,7 +122,7 @@ class PortfolioControllerTest {
 
     @Test
     void updatePortfolioById_success() throws Exception {
-        Portfolio updatePortfolio = new Portfolio("Tech stocks updated", Date.valueOf("2022-08-03"), investor.getId(), true);
+        Portfolio updatePortfolio = new Portfolio("Tech stocks updated", Date.valueOf("2022-08-03"), applicationUser.getId(), true);
 
         String portfolioEntityId = portfolio.getId().toString();
 

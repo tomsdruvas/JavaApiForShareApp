@@ -1,4 +1,4 @@
-package com.rateMyPortfolio.investor;
+package com.rateMyPortfolio.applicationUser;
 
 
 
@@ -19,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.*;
 
 @ExtendWith(MockitoExtension.class)
-class InvestorServiceTest {
+class ApplicationUserServiceTest {
 
     @Mock
     private InvestorRepository investorRepository;
@@ -44,23 +44,23 @@ class InvestorServiceTest {
     @Test
     void canGetInvestorByIdFromService() {
         Long investorId = 1L;
-        Investor investorForMock = new Investor(investorId, "John","John@mail.com");
-        doReturn(investorForMock).when(investorRepository).findInvestorById(investorId);
+        ApplicationUser applicationUserForMock = new ApplicationUser(investorId, "John","John@mail.com");
+        doReturn(applicationUserForMock).when(investorRepository).findInvestorById(investorId);
         doReturn(true).when(investorRepository).existsById(investorId);
 
-        Investor investorEntityFromService = underTest.getById(investorId);
+        ApplicationUser applicationUserEntityFromService = underTest.getById(investorId);
 
-        assertThat(investorId).isEqualTo(investorEntityFromService.getId());
-        assertThat(investorForMock.getName()).isEqualTo(investorEntityFromService.getName());
+        assertThat(investorId).isEqualTo(applicationUserEntityFromService.getId());
+        assertThat(applicationUserForMock.getName()).isEqualTo(applicationUserEntityFromService.getName());
         verify(investorRepository).findInvestorById(investorId);
     }
 
     @Test
     void canSaveUsingService() {
-        Investor expected = new Investor("Jack", "Jack@financials.com");
+        ApplicationUser expected = new ApplicationUser("Jack", "Jack@financials.com");
         when(investorRepository.save(expected))
                 .thenReturn(expected);
-        Investor actual = underTest.save(expected);
+        ApplicationUser actual = underTest.save(expected);
         verify(investorRepository).save(expected);
         assertThat(expected).isEqualTo(actual);
     }
@@ -95,22 +95,22 @@ class InvestorServiceTest {
     @Test
     void updateInvestorById() {
         Long investorId = 1L;
-        Investor investorForMock = new Investor(investorId, "John","John@mail.com");
-        Investor updateInvestor = new Investor("Updated","Jack@mail.com");
-        Investor updatedInvestor = new Investor(investorId,"Updated","Jack@mail.com");
+        ApplicationUser applicationUserForMock = new ApplicationUser(investorId, "John","John@mail.com");
+        ApplicationUser updateApplicationUser = new ApplicationUser("Updated","Jack@mail.com");
+        ApplicationUser updatedApplicationUser = new ApplicationUser(investorId,"Updated","Jack@mail.com");
 
 
         when(investorRepository.existsById(1L)).thenReturn(true);
-        doReturn(investorForMock).when(investorRepository).findInvestorById(investorId);
-        when(investorRepository.save(investorForMock)).thenReturn(updatedInvestor);
+        doReturn(applicationUserForMock).when(investorRepository).findInvestorById(investorId);
+        when(investorRepository.save(applicationUserForMock)).thenReturn(updatedApplicationUser);
 
 
-        Investor actual = underTest.updateById(investorId, updateInvestor);
-        assertThat(actual).isEqualTo(updatedInvestor);
+        ApplicationUser actual = underTest.updateById(investorId, updateApplicationUser);
+        assertThat(actual).isEqualTo(updatedApplicationUser);
 
         verify(investorRepository).existsById(1L);
         verify(investorRepository).findInvestorById(1L);
-        verify(investorRepository).save(investorForMock);
+        verify(investorRepository).save(applicationUserForMock);
 
 
 

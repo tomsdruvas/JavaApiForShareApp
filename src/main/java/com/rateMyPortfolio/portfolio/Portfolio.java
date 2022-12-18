@@ -1,16 +1,31 @@
 package com.rateMyPortfolio.portfolio;
 
-import com.rateMyPortfolio.comment.Comment;
-import com.rateMyPortfolio.investment.Investment;
-import com.rateMyPortfolio.investor.Investor;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import lombok.*;
-
-import javax.persistence.*;
 import java.util.Date;
 import java.util.Set;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.rateMyPortfolio.applicationUser.ApplicationUser;
+import com.rateMyPortfolio.comment.Comment;
+import com.rateMyPortfolio.investment.Investment;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @Entity
 @Table
@@ -54,7 +69,7 @@ public class Portfolio {
     @ManyToOne
     @JoinColumn(name = "investor_id", insertable = false, updatable = false)
     @NonNull
-    private Investor investor;
+    private ApplicationUser applicationUser;
 
     @Column
     @NonNull
@@ -65,11 +80,11 @@ public class Portfolio {
     private Set<Comment> comments;
 
 
-    public Portfolio(Long id, @NonNull String name, @NonNull Date createdDate, @NonNull Investor investor, @NonNull Boolean isPublic) {
+    public Portfolio(Long id, @NonNull String name, @NonNull Date createdDate, @NonNull ApplicationUser applicationUser, @NonNull Boolean isPublic) {
         this.id = id;
         this.name = name;
         this.createdDate = createdDate;
-        this.investor = investor;
+        this.applicationUser = applicationUser;
         this.isPublic = isPublic;
     }
 

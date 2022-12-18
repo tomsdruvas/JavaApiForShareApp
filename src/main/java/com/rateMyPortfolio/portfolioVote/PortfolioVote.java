@@ -1,17 +1,26 @@
 package com.rateMyPortfolio.portfolioVote;
 
 
-import com.rateMyPortfolio.investor.Investor;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.rateMyPortfolio.applicationUser.ApplicationUser;
 import com.rateMyPortfolio.portfolio.Portfolio;
 import com.rateMyPortfolio.utils.VoteEnum;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
-
-import javax.persistence.*;
 
 @Entity
 @Table(uniqueConstraints = { @UniqueConstraint(name = "UniqueInvestorAndPortfolio",
@@ -41,7 +50,7 @@ public class PortfolioVote {
     @ManyToOne
     @JoinColumn(name = "investor_id", insertable = false, updatable = false)
     @NonNull
-    private Investor investor;
+    private ApplicationUser applicationUser;
 
     @Column(name = "portfolio_id")
     private Long portfolioId;

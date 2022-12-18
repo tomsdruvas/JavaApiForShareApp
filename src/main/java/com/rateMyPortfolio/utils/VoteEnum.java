@@ -1,7 +1,5 @@
 package com.rateMyPortfolio.utils;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 public enum VoteEnum {
 
     UP("UP"),
